@@ -12,14 +12,14 @@
 
     public static class OAuthHelper
     {
-        public static async Task<AuthorizationResult> DoHttpPost(string endpoint, string content, NetworkCredential credential = null)
+        public static async Task<AuthorizationResult> DoHttpPostAsync(string endpoint, string content, NetworkCredential credential = null)
         {
-            var r = await OAuthHelper.DoHttpPost2(endpoint, content, credential);
-            var result = OAuthHelper.ParseAuthorizationResult(r.Result, r.AuthorizationError, r.Error);
+            var (ResponseData, AuthorizationError, Error) = await OAuthHelper.DoHttpPost2Async(endpoint, content, credential);
+            var result = OAuthHelper.ParseAuthorizationResult(ResponseData, AuthorizationError, Error);
             return result;
         }
-        //public static async Task<(dynamic Result, dynamic AuthorizationError, Exception Error)> DoHttpPost(string endpoint, string content, NetworkCredential credential = null)
-        private static async Task<(string Result, string AuthorizationError, Exception Error)> DoHttpPost2(string endpoint, string content, NetworkCredential credential = null)
+
+        private static async Task<(string ResponseData, string AuthorizationError, Exception Error)> DoHttpPost2Async(string endpoint, string content, NetworkCredential credential = null)
         {
             var postBytes = Encoding.UTF8.GetBytes(content);
             var requestId = Guid.NewGuid().ToString();
@@ -36,8 +36,6 @@
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = postBytes.Length;
 
-            //dynamic result = null;
-            //dynamic authorizationError = null;
             var result = string.Empty;
             var authorizationError = string.Empty;
             Exception error = null;
@@ -53,8 +51,6 @@
                 var resp = await request.GetResponseAsync();
                 using (var reader = new StreamReader(resp.GetResponseStream()))
                 {
-                    //var response = (await reader.ReadToEndAsync()).Trim();
-                    //result = JsonConvert.DeserializeObject(response);
                     result = (await reader.ReadToEndAsync()).Trim();
                 }
             }
@@ -101,6 +97,7 @@
 
             return result;
         }
+
         private static X509Certificate2 GetCertificate(string thumbprint)
         {
             var store = new X509Store(StoreLocation.CurrentUser);
@@ -283,6 +280,7 @@
             result = result.AddSeconds(unixTimeStamp).ToUniversalTime();
             return result;
         }
+
         public static bool TryValidateToken(string jwt, dynamic keys, out string errorMessage)
         {
             if (string.IsNullOrEmpty(jwt))
@@ -404,36 +402,5 @@
             errorMessage = "";
             return true;
         }
-
-        //public static string Decode(string token, string key, bool verify)
-        //{
-        //    var parts = token.Split('.');
-        //    var header = parts[0];
-        //    var payload = parts[1];
-        //    byte[] crypto = Base64UrlDecode(parts[2]);
-
-        //    var headerJson = Encoding.UTF8.GetString(Base64UrlDecode(header));
-        //    var headerData = JObject.Parse(headerJson);
-        //    var payloadJson = Encoding.UTF8.GetString(Base64UrlDecode(payload));
-        //    var payloadData = JObject.Parse(payloadJson);
-
-        //    if (verify)
-        //    {
-        //        var bytesToSign = Encoding.UTF8.GetBytes(string.Concat(header, ".", payload));
-        //        var keyBytes = Encoding.UTF8.GetBytes(key);
-        //        var algorithm = (string)headerData["alg"];
-
-        //        var signature = HashAlgorithms[GetHashAlgorithm(algorithm)](keyBytes, bytesToSign);
-        //        var decodedCrypto = Convert.ToBase64String(crypto);
-        //        var decodedSignature = Convert.ToBase64String(signature);
-
-        //        if (decodedCrypto != decodedSignature)
-        //        {
-        //            throw new ApplicationException(string.Format("Invalid signature. Expected {0} got {1}", decodedCrypto, decodedSignature));
-        //        }
-        //    }
-
-        //    return payloadData.ToString();
-        //}
     }
 }

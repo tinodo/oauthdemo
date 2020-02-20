@@ -848,7 +848,7 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
                 $"&username={username}" +
                 $"&password={password}&" + 
                 GenerateGenericContent(out var networkCredential);
-            var result = await OAuthHelper.DoHttpPost(tokenEndpoint, content, networkCredential);
+            var result = await OAuthHelper.DoHttpPostAsync(tokenEndpoint, content, networkCredential);
             
             return result;
         }
@@ -868,7 +868,7 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
             if (!string.IsNullOrEmpty(state))
                 content += $"&state={state}";
             
-            var result = await OAuthHelper.DoHttpPost(tokenEndpoint, content, networkCredential);
+            var result = await OAuthHelper.DoHttpPostAsync(tokenEndpoint, content, networkCredential);
             return result;
         }
 
@@ -889,7 +889,7 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
             if (useCustomLanguage)
                 deviceCodeEndpoint += $"?mkt={customLanguage}";
 
-            var result = await OAuthHelper.DoHttpPost(deviceCodeEndpoint, content, networkCredential);
+            var result = await OAuthHelper.DoHttpPostAsync(deviceCodeEndpoint, content, networkCredential);
             var code = result.Raw;
 
             if (string.IsNullOrEmpty(result.Error) && result.Exception == null)
@@ -915,7 +915,7 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
         /// <returns>An <see cref="AuthorizationResult"/> instance with the results of the authorization.</returns>
         private async Task<AuthorizationResult> ExecuteAuthorizationCodeFlow_Http()
         {
-            var result = new AuthorizationResult();
+            //var result = new AuthorizationResult();
             
             var tokenEndpoint = tbTokenEndpoint.Text;
             var authEndpoint = tbAuthEndpoint.Text;
@@ -986,24 +986,12 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
             }
 
             var codeGrant = new ActiveFlowBrowserForm(authEndpoint, content);
-            if (!codeGrant.ProcessRequest())
-            {
-                if (!string.IsNullOrEmpty(codeGrant.Error))
-                {
-                    result.Error = codeGrant.Error;
-                }
-                else
-                {
-                    if (codeGrant.ResponseUri == null)
-                        result.Error = "Authentication cancelled.";
-                    else
-                        result.Error = "Error processing response: " + codeGrant.ResponseUri.ToString();
-                }
+            var codeGrantAuthorizationResult = codeGrant.ProcessRequest();
 
-                return result;
-            }
+            if (!string.IsNullOrEmpty(codeGrantAuthorizationResult.Error))
+                return codeGrantAuthorizationResult;
 
-            var code = codeGrant.AuthorizationCode;
+            var code = codeGrantAuthorizationResult.Code;
             content = GenerateGenericContent(out var networkCredential) +
                 $"&grant_type=authorization_code" +
                 $"&redirect_uri={redirectUri}"+
@@ -1012,7 +1000,7 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
             if (!string.IsNullOrEmpty(pkceMethod))
                 content += $"&code_verifier={pkceVerifier}";
 
-            result = await OAuthHelper.DoHttpPost(tokenEndpoint, content, networkCredential);
+            var result = await OAuthHelper.DoHttpPostAsync(tokenEndpoint, content, networkCredential);
             result.Code = code;
             return result;
         }
@@ -1086,21 +1074,7 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
                 content += $"&prompt={prompt}";
 
             var implicitGrant = new ActiveFlowBrowserForm(authEndpoint, content);
-            var completed = implicitGrant.ProcessRequest();
-            var result = new AuthorizationResult();
-            if (!completed)
-            {
-                result.Error = "Authentication cancelled.";
-            }
-            else
-            {
-                result.Error = implicitGrant.Error;
-                result.AccessToken = implicitGrant.AccessToken;
-                result.RefreshToken = string.Empty;
-                result.IDToken = implicitGrant.IdToken;
-                result.Code = implicitGrant.AuthorizationCode;
-            }
-
+            var result = implicitGrant.ProcessRequest();
             return result;
         }
 
@@ -1128,6 +1102,12 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
             var pkceMethod = (string)cbCodeFlow_PKCE_Method.SelectedItem;
             var pkceVerifier = tbCodeFlow_PKCE_Verifier.Text;
             var nonce = Guid.NewGuid().ToString(); // nonce: A value included in the request, generated by the app, that will be included in the resulting id_token as a claim. The app can then verify this value to mitigate token replay attacks. The value is typically a randomized, unique string that can be used to identify the origin of the request. Only required when an id_token is requested. nonce is only required when requesting an ID token.
+
+            if (requestAccessToken && requestCode)
+            {
+                MessageBox.Show("You cannot request both an Access Token and a Code.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return result;
+            }
 
             var responseTypes = new List<string>();
             
@@ -1204,25 +1184,12 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
                 content += $"&prompt={prompt}";
 
             var implicitGrant = new ActiveFlowBrowserForm(authEndpoint, content);
-            var error = string.Empty;
-            if (!implicitGrant.ProcessRequest())
-            {
-                if (!string.IsNullOrEmpty(implicitGrant.Error))
-                {
-                    error = implicitGrant.Error;
-                }
-                else
-                {
-                    if (implicitGrant.ResponseUri == null)
-                        error = "User cancelled authentication.";
-                    else
-                        error = $"Error parsing response: {implicitGrant.ResponseUri}";
-                }
-            }
+            var implicitGrantResult = implicitGrant.ProcessRequest();
 
-            var idToken = implicitGrant.IdToken;
-            var accessToken = implicitGrant.AccessToken;
-            var code = implicitGrant.AuthorizationCode;
+            var idToken = implicitGrantResult.IDToken;
+            var accessToken = implicitGrantResult.AccessToken;
+            var code = implicitGrantResult.Code;
+            var error = implicitGrantResult.Error;
 
             if (!string.IsNullOrEmpty(code) && string.IsNullOrEmpty(error))
             {
@@ -1233,7 +1200,7 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
                 if (!string.IsNullOrEmpty(pkceMethod))
                     content += $"&code_verifier={pkceVerifier}";
 
-                result = await OAuthHelper.DoHttpPost(tokenEndpoint, content, networkCredential);
+                result = await OAuthHelper.DoHttpPostAsync(tokenEndpoint, content, networkCredential);
             }
 
             result.Code = code;
@@ -1275,7 +1242,7 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
                 $"&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer" +
                 $"&requested_token_use=on_behalf_of" +
                 $"&assertion={accessToken}";
-            var result = await OAuthHelper.DoHttpPost(tokenEndpoint, content);
+            var result = await OAuthHelper.DoHttpPostAsync(tokenEndpoint, content);
             return result;
         }
 

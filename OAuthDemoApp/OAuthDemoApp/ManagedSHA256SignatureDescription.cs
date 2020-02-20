@@ -1,8 +1,8 @@
-﻿using System;
-using System.Security.Cryptography;
-
-namespace OAuthDemoApp
+﻿namespace OAuthDemoApp
 {
+    using System;
+    using System.Security.Cryptography;
+
     public class ManagedSHA256SignatureDescription : SignatureDescription
     {
         public ManagedSHA256SignatureDescription()
@@ -14,9 +14,7 @@ namespace OAuthDemoApp
         public override AsymmetricSignatureDeformatter CreateDeformatter(AsymmetricAlgorithm key)
         {
             if (key == null)
-            {
                 throw new ArgumentNullException(nameof(key));
-            }
 
             var deformatter = new RSAPKCS1SignatureDeformatter(key);
             deformatter.SetHashAlgorithm(typeof(SHA256Managed).FullName);
@@ -26,9 +24,7 @@ namespace OAuthDemoApp
         public override AsymmetricSignatureFormatter CreateFormatter(AsymmetricAlgorithm key)
         {
             if (key == null)
-            {
                 throw new ArgumentNullException(nameof(key));
-            }
 
             var provider = (RSACryptoServiceProvider)key;
             var cspParams = new CspParameters();
@@ -36,9 +32,7 @@ namespace OAuthDemoApp
             cspParams.KeyContainerName = provider.CspKeyContainerInfo.KeyContainerName;
             cspParams.KeyNumber = (int)provider.CspKeyContainerInfo.KeyNumber;
             if (provider.CspKeyContainerInfo.MachineKeyStore)
-            {
                 cspParams.Flags = CspProviderFlags.UseMachineKeyStore;
-            }
 
             cspParams.Flags |= CspProviderFlags.UseExistingKey;
             provider = new RSACryptoServiceProvider(cspParams);

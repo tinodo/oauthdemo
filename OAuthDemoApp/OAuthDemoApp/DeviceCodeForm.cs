@@ -1,26 +1,18 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.UI;
-using System.Windows.Forms;
-
-namespace OAuthDemoApp
+﻿namespace OAuthDemoApp
 {
+    using Newtonsoft.Json;
+    using System;
+    using System.Net;
+    using System.Windows.Forms;
+    
     public partial class DeviceCodeForm : Form
     {
-        private string clientId;
-        private dynamic authorizationServerResponseMessage;
-        private string tokenEndpoint;
-        private string genericContent;
-        private DateTime startTime;
-        private NetworkCredential networkCredential;
+        private readonly string clientId;
+        private readonly dynamic authorizationServerResponseMessage;
+        private readonly string tokenEndpoint;
+        private readonly string genericContent;
+        private readonly DateTime startTime;
+        private readonly NetworkCredential networkCredential;
         private DateTime lastPoll = DateTime.Now;
 
         public AuthorizationResult Result
@@ -81,6 +73,7 @@ namespace OAuthDemoApp
         private async void AuthenticationCallback(object sender, EventArgs e)
         {
             // should resource be part of the content? docs say no; https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code
+            // device_code for AADv2 and code for AADv1
             var deviceCode = "device_code";
             if (string.IsNullOrEmpty((string)this.authorizationServerResponseMessage.verification_uri))
             {
@@ -90,7 +83,7 @@ namespace OAuthDemoApp
             var content = $"grant_type=urn:ietf:params:oauth:grant-type:device_code" +
                 $"&client_id={this.clientId}" +
                 $"&{deviceCode}={this.authorizationServerResponseMessage.device_code}";
-            var result = await OAuthHelper.DoHttpPost(this.tokenEndpoint, content, this.networkCredential);
+            var result = await OAuthHelper.DoHttpPostAsync(this.tokenEndpoint, content, this.networkCredential);
 
             this.tbPollingResult.Text = OAuthHelper.FormatJson(result.Error);
             this.lastPoll = DateTime.Now;
