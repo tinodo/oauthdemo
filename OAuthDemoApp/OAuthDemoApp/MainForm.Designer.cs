@@ -129,19 +129,12 @@
             this.tbOptions_State = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
-            this.gbCodeFlow_PKCE = new System.Windows.Forms.GroupBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.tbCodeFlow_PKCE_Verifier = new System.Windows.Forms.TextBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.cbCodeFlow_PKCE_Method = new System.Windows.Forms.ComboBox();
             this.btnExecute = new System.Windows.Forms.Button();
             this.rbPreferMSAL = new System.Windows.Forms.RadioButton();
             this.rbPreferHttp = new System.Windows.Forms.RadioButton();
             this.rbPreferADAL = new System.Windows.Forms.RadioButton();
             this.tbResult = new System.Windows.Forms.TabPage();
             this.btnTest = new System.Windows.Forms.Button();
-            this.btnUseRefreshToken = new System.Windows.Forms.Button();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tpErrors = new System.Windows.Forms.TabPage();
             this.tbErrors = new System.Windows.Forms.TextBox();
@@ -154,6 +147,7 @@
             this.tbAccessTokenDecoded = new System.Windows.Forms.TextBox();
             this.tpRefreshToken = new System.Windows.Forms.TabPage();
             this.tbRefreshToken = new System.Windows.Forms.TextBox();
+            this.btnUseRefreshToken = new System.Windows.Forms.Button();
             this.tpIdToken = new System.Windows.Forms.TabPage();
             this.btnValidateIdToken = new System.Windows.Forms.Button();
             this.tbIdToken = new System.Windows.Forms.TextBox();
@@ -161,6 +155,12 @@
             this.tbIdTokenDecoded = new System.Windows.Forms.TextBox();
             this.btnExit = new System.Windows.Forms.Button();
             this.ttHint = new System.Windows.Forms.ToolTip(this.components);
+            this.gbCodeFlow_PKCE = new System.Windows.Forms.GroupBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.tbCodeFlow_PKCE_Verifier = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.cbCodeFlow_PKCE_Method = new System.Windows.Forms.ComboBox();
             this.gbClientCredential_Cert.SuspendLayout();
             this.gbClientCredential_WIA.SuspendLayout();
             this.tcMain.SuspendLayout();
@@ -179,7 +179,6 @@
             this.gbROPCFlow.SuspendLayout();
             this.tbOptions.SuspendLayout();
             this.gbMiscOptions.SuspendLayout();
-            this.gbCodeFlow_PKCE.SuspendLayout();
             this.tbResult.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tpErrors.SuspendLayout();
@@ -189,6 +188,7 @@
             this.tpRefreshToken.SuspendLayout();
             this.tpIdToken.SuspendLayout();
             this.tpIdTokenDecoded.SuspendLayout();
+            this.gbCodeFlow_PKCE.SuspendLayout();
             this.SuspendLayout();
             // 
             // label8
@@ -408,7 +408,6 @@
             this.tbClientCredentials_Cert_CertSN.Name = "tbClientCredentials_Cert_CertSN";
             this.tbClientCredentials_Cert_CertSN.Size = new System.Drawing.Size(375, 20);
             this.tbClientCredentials_Cert_CertSN.TabIndex = 15;
-            this.tbClientCredentials_Cert_CertSN.Text = "01b76f2d2dba33e01832a11a2be3ae88bf9bfb7d";
             // 
             // label11
             // 
@@ -864,6 +863,7 @@
             // 
             // tpGrant
             // 
+            this.tpGrant.Controls.Add(this.gbCodeFlow_PKCE);
             this.tpGrant.Controls.Add(this.gbDeviceCodeFlow);
             this.tpGrant.Controls.Add(this.btnNext4);
             this.tpGrant.Controls.Add(this.gbHybridFlow);
@@ -883,9 +883,9 @@
             this.gbDeviceCodeFlow.Controls.Add(this.cbCultures);
             this.gbDeviceCodeFlow.Controls.Add(this.cbDeviceCodeFlowMessageLanguage);
             this.gbDeviceCodeFlow.Enabled = false;
-            this.gbDeviceCodeFlow.Location = new System.Drawing.Point(14, 425);
+            this.gbDeviceCodeFlow.Location = new System.Drawing.Point(14, 461);
             this.gbDeviceCodeFlow.Name = "gbDeviceCodeFlow";
-            this.gbDeviceCodeFlow.Size = new System.Drawing.Size(415, 46);
+            this.gbDeviceCodeFlow.Size = new System.Drawing.Size(499, 46);
             this.gbDeviceCodeFlow.TabIndex = 41;
             this.gbDeviceCodeFlow.TabStop = false;
             this.gbDeviceCodeFlow.Text = "Device Code Flow";
@@ -926,9 +926,9 @@
             this.gbHybridFlow.Controls.Add(this.cbHybridFlow_Implicit_RequestAccessToken);
             this.gbHybridFlow.Controls.Add(this.cbHybridFlow_Implicit_RequestIdToken);
             this.gbHybridFlow.Enabled = false;
-            this.gbHybridFlow.Location = new System.Drawing.Point(14, 357);
+            this.gbHybridFlow.Location = new System.Drawing.Point(14, 393);
             this.gbHybridFlow.Name = "gbHybridFlow";
-            this.gbHybridFlow.Size = new System.Drawing.Size(415, 62);
+            this.gbHybridFlow.Size = new System.Drawing.Size(499, 62);
             this.gbHybridFlow.TabIndex = 40;
             this.gbHybridFlow.TabStop = false;
             this.gbHybridFlow.Text = "Hybrid / Implicit Flow";
@@ -953,6 +953,7 @@
             this.cbHybridFlow_Implicit_RequestCode.TabIndex = 35;
             this.cbHybridFlow_Implicit_RequestCode.Text = "Request Code";
             this.cbHybridFlow_Implicit_RequestCode.UseVisualStyleBackColor = true;
+            this.cbHybridFlow_Implicit_RequestCode.CheckedChanged += new System.EventHandler(this.cbHybridFlow_Implicit_RequestCode_CheckedChanged);
             // 
             // cbHybridFlow_Implicit_RequestAccessToken
             // 
@@ -989,9 +990,9 @@
             this.gbOnBehalfOf.Controls.Add(this.label31);
             this.gbOnBehalfOf.Controls.Add(this.tbOBO_ClientSecret);
             this.gbOnBehalfOf.Enabled = false;
-            this.gbOnBehalfOf.Location = new System.Drawing.Point(14, 188);
+            this.gbOnBehalfOf.Location = new System.Drawing.Point(14, 121);
             this.gbOnBehalfOf.Name = "gbOnBehalfOf";
-            this.gbOnBehalfOf.Size = new System.Drawing.Size(415, 163);
+            this.gbOnBehalfOf.Size = new System.Drawing.Size(499, 160);
             this.gbOnBehalfOf.TabIndex = 39;
             this.gbOnBehalfOf.TabStop = false;
             this.gbOnBehalfOf.Text = "On-Behalf-Of";
@@ -1091,9 +1092,9 @@
             this.gbROPCFlow.Controls.Add(this.label19);
             this.gbROPCFlow.Controls.Add(this.tb_ClientCredentials_UseROP_Password);
             this.gbROPCFlow.Enabled = false;
-            this.gbROPCFlow.Location = new System.Drawing.Point(14, 106);
+            this.gbROPCFlow.Location = new System.Drawing.Point(14, 39);
             this.gbROPCFlow.Name = "gbROPCFlow";
-            this.gbROPCFlow.Size = new System.Drawing.Size(415, 76);
+            this.gbROPCFlow.Size = new System.Drawing.Size(499, 76);
             this.gbROPCFlow.TabIndex = 37;
             this.gbROPCFlow.TabStop = false;
             this.gbROPCFlow.Text = "Resource Owner Password Credentials Flow";
@@ -1135,7 +1136,6 @@
             // 
             this.tbOptions.Controls.Add(this.cbAddClientRequestId);
             this.tbOptions.Controls.Add(this.gbMiscOptions);
-            this.tbOptions.Controls.Add(this.gbCodeFlow_PKCE);
             this.tbOptions.Controls.Add(this.btnExecute);
             this.tbOptions.Controls.Add(this.rbPreferMSAL);
             this.tbOptions.Controls.Add(this.rbPreferHttp);
@@ -1150,7 +1150,7 @@
             // cbAddClientRequestId
             // 
             this.cbAddClientRequestId.AutoSize = true;
-            this.cbAddClientRequestId.Location = new System.Drawing.Point(15, 365);
+            this.cbAddClientRequestId.Location = new System.Drawing.Point(23, 228);
             this.cbAddClientRequestId.Name = "cbAddClientRequestId";
             this.cbAddClientRequestId.Size = new System.Drawing.Size(247, 17);
             this.cbAddClientRequestId.TabIndex = 55;
@@ -1235,6 +1235,7 @@
             this.cbCodeFlow_Prompt.FormattingEnabled = true;
             this.cbCodeFlow_Prompt.Items.AddRange(new object[] {
             "login",
+            "select_account",
             "consent",
             "admin_consent"});
             this.cbCodeFlow_Prompt.Location = new System.Drawing.Point(134, 78);
@@ -1277,71 +1278,6 @@
             this.label23.Size = new System.Drawing.Size(68, 13);
             this.label23.TabIndex = 47;
             this.label23.Text = "Domain Hint:";
-            // 
-            // gbCodeFlow_PKCE
-            // 
-            this.gbCodeFlow_PKCE.Controls.Add(this.label20);
-            this.gbCodeFlow_PKCE.Controls.Add(this.tbCodeFlow_PKCE_Verifier);
-            this.gbCodeFlow_PKCE.Controls.Add(this.label26);
-            this.gbCodeFlow_PKCE.Controls.Add(this.label25);
-            this.gbCodeFlow_PKCE.Controls.Add(this.cbCodeFlow_PKCE_Method);
-            this.gbCodeFlow_PKCE.Location = new System.Drawing.Point(15, 228);
-            this.gbCodeFlow_PKCE.Name = "gbCodeFlow_PKCE";
-            this.gbCodeFlow_PKCE.Size = new System.Drawing.Size(516, 131);
-            this.gbCodeFlow_PKCE.TabIndex = 53;
-            this.gbCodeFlow_PKCE.TabStop = false;
-            this.gbCodeFlow_PKCE.Text = " Proof Key for Code Exchange (PKCE)";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(9, 25);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(470, 13);
-            this.label20.TabIndex = 56;
-            this.label20.Text = "PKCE Can be used when the client obtains a Code, like in Authorization Code Flow " +
-    "or Hyrbid Flow.";
-            // 
-            // tbCodeFlow_PKCE_Verifier
-            // 
-            this.tbCodeFlow_PKCE_Verifier.Location = new System.Drawing.Point(191, 93);
-            this.tbCodeFlow_PKCE_Verifier.MaxLength = 128;
-            this.tbCodeFlow_PKCE_Verifier.Name = "tbCodeFlow_PKCE_Verifier";
-            this.tbCodeFlow_PKCE_Verifier.Size = new System.Drawing.Size(240, 20);
-            this.tbCodeFlow_PKCE_Verifier.TabIndex = 55;
-            this.tbCodeFlow_PKCE_Verifier.Text = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyx0123456789";
-            this.ttHint.SetToolTip(this.tbCodeFlow_PKCE_Verifier, resources.GetString("tbCodeFlow_PKCE_Verifier.ToolTip"));
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(9, 96);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(70, 13);
-            this.label26.TabIndex = 54;
-            this.label26.Text = "Code Verifier:";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(9, 69);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(124, 13);
-            this.label25.TabIndex = 54;
-            this.label25.Text = "Code Challenge Method:";
-            // 
-            // cbCodeFlow_PKCE_Method
-            // 
-            this.cbCodeFlow_PKCE_Method.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCodeFlow_PKCE_Method.FormattingEnabled = true;
-            this.cbCodeFlow_PKCE_Method.Items.AddRange(new object[] {
-            "plain",
-            "S256"});
-            this.cbCodeFlow_PKCE_Method.Location = new System.Drawing.Point(191, 66);
-            this.cbCodeFlow_PKCE_Method.Name = "cbCodeFlow_PKCE_Method";
-            this.cbCodeFlow_PKCE_Method.Size = new System.Drawing.Size(121, 21);
-            this.cbCodeFlow_PKCE_Method.TabIndex = 55;
-            this.ttHint.SetToolTip(this.cbCodeFlow_PKCE_Method, resources.GetString("cbCodeFlow_PKCE_Method.ToolTip"));
             // 
             // btnExecute
             // 
@@ -1407,17 +1343,6 @@
             this.btnTest.Text = "Test Graph UserInfo";
             this.btnTest.UseVisualStyleBackColor = true;
             this.btnTest.Click += new System.EventHandler(this.BtnTest_Click);
-            // 
-            // btnUseRefreshToken
-            // 
-            this.btnUseRefreshToken.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUseRefreshToken.Location = new System.Drawing.Point(566, 444);
-            this.btnUseRefreshToken.Name = "btnUseRefreshToken";
-            this.btnUseRefreshToken.Size = new System.Drawing.Size(110, 23);
-            this.btnUseRefreshToken.TabIndex = 40;
-            this.btnUseRefreshToken.Text = "Use &Refresh Token";
-            this.btnUseRefreshToken.UseVisualStyleBackColor = true;
-            this.btnUseRefreshToken.Click += new System.EventHandler(this.btnUseRefreshToken_Click);
             // 
             // tabControl2
             // 
@@ -1551,6 +1476,17 @@
             this.tbRefreshToken.Size = new System.Drawing.Size(676, 435);
             this.tbRefreshToken.TabIndex = 7;
             // 
+            // btnUseRefreshToken
+            // 
+            this.btnUseRefreshToken.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUseRefreshToken.Location = new System.Drawing.Point(566, 444);
+            this.btnUseRefreshToken.Name = "btnUseRefreshToken";
+            this.btnUseRefreshToken.Size = new System.Drawing.Size(110, 23);
+            this.btnUseRefreshToken.TabIndex = 40;
+            this.btnUseRefreshToken.Text = "Use &Refresh Token";
+            this.btnUseRefreshToken.UseVisualStyleBackColor = true;
+            this.btnUseRefreshToken.Click += new System.EventHandler(this.btnUseRefreshToken_Click);
+            // 
             // tpIdToken
             // 
             this.tpIdToken.Controls.Add(this.btnValidateIdToken);
@@ -1620,6 +1556,72 @@
             this.ttHint.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.ttHint.ToolTipTitle = "Hint";
             // 
+            // gbCodeFlow_PKCE
+            // 
+            this.gbCodeFlow_PKCE.Controls.Add(this.label20);
+            this.gbCodeFlow_PKCE.Controls.Add(this.tbCodeFlow_PKCE_Verifier);
+            this.gbCodeFlow_PKCE.Controls.Add(this.label26);
+            this.gbCodeFlow_PKCE.Controls.Add(this.label25);
+            this.gbCodeFlow_PKCE.Controls.Add(this.cbCodeFlow_PKCE_Method);
+            this.gbCodeFlow_PKCE.Enabled = false;
+            this.gbCodeFlow_PKCE.Location = new System.Drawing.Point(14, 287);
+            this.gbCodeFlow_PKCE.Name = "gbCodeFlow_PKCE";
+            this.gbCodeFlow_PKCE.Size = new System.Drawing.Size(499, 100);
+            this.gbCodeFlow_PKCE.TabIndex = 54;
+            this.gbCodeFlow_PKCE.TabStop = false;
+            this.gbCodeFlow_PKCE.Text = " Proof Key for Code Exchange (PKCE)";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(9, 25);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(470, 13);
+            this.label20.TabIndex = 56;
+            this.label20.Text = "PKCE Can be used when the client obtains a Code, like in Authorization Code Flow " +
+    "or Hyrbid Flow.";
+            // 
+            // tbCodeFlow_PKCE_Verifier
+            // 
+            this.tbCodeFlow_PKCE_Verifier.Location = new System.Drawing.Point(143, 68);
+            this.tbCodeFlow_PKCE_Verifier.MaxLength = 128;
+            this.tbCodeFlow_PKCE_Verifier.Name = "tbCodeFlow_PKCE_Verifier";
+            this.tbCodeFlow_PKCE_Verifier.Size = new System.Drawing.Size(350, 20);
+            this.tbCodeFlow_PKCE_Verifier.TabIndex = 55;
+            this.tbCodeFlow_PKCE_Verifier.Text = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyx0123456789";
+            this.ttHint.SetToolTip(this.tbCodeFlow_PKCE_Verifier, resources.GetString("tbCodeFlow_PKCE_Verifier.ToolTip"));
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(11, 71);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(70, 13);
+            this.label26.TabIndex = 54;
+            this.label26.Text = "Code Verifier:";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(11, 44);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(124, 13);
+            this.label25.TabIndex = 54;
+            this.label25.Text = "Code Challenge Method:";
+            // 
+            // cbCodeFlow_PKCE_Method
+            // 
+            this.cbCodeFlow_PKCE_Method.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCodeFlow_PKCE_Method.FormattingEnabled = true;
+            this.cbCodeFlow_PKCE_Method.Items.AddRange(new object[] {
+            "plain",
+            "S256"});
+            this.cbCodeFlow_PKCE_Method.Location = new System.Drawing.Point(143, 41);
+            this.cbCodeFlow_PKCE_Method.Name = "cbCodeFlow_PKCE_Method";
+            this.cbCodeFlow_PKCE_Method.Size = new System.Drawing.Size(121, 21);
+            this.cbCodeFlow_PKCE_Method.TabIndex = 55;
+            this.ttHint.SetToolTip(this.cbCodeFlow_PKCE_Method, resources.GetString("cbCodeFlow_PKCE_Method.ToolTip"));
+            // 
             // MainForm
             // 
             this.AcceptButton = this.btnNext1;
@@ -1667,8 +1669,6 @@
             this.tbOptions.PerformLayout();
             this.gbMiscOptions.ResumeLayout(false);
             this.gbMiscOptions.PerformLayout();
-            this.gbCodeFlow_PKCE.ResumeLayout(false);
-            this.gbCodeFlow_PKCE.PerformLayout();
             this.tbResult.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
             this.tpErrors.ResumeLayout(false);
@@ -1685,6 +1685,8 @@
             this.tpIdToken.PerformLayout();
             this.tpIdTokenDecoded.ResumeLayout(false);
             this.tpIdTokenDecoded.PerformLayout();
+            this.gbCodeFlow_PKCE.ResumeLayout(false);
+            this.gbCodeFlow_PKCE.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1793,18 +1795,12 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbOptions_State;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.GroupBox gbCodeFlow_PKCE;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.ComboBox cbCodeFlow_PKCE_Method;
-        private System.Windows.Forms.TextBox tbCodeFlow_PKCE_Verifier;
-        private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Button btnGetMetadata;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.TextBox tbMetadataEndpoint;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.TextBox tbClientRedirectUri;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox tbOBO_ScopeOrResource;
         private System.Windows.Forms.TabPage tpAccessTokenDecoded;
         private System.Windows.Forms.TabPage tpIdTokenDecoded;
@@ -1821,6 +1817,12 @@
         private System.Windows.Forms.ComboBox cbCultures;
         private System.Windows.Forms.ToolTip ttHint;
         private System.Windows.Forms.CheckBox cbAddClientRequestId;
+        private System.Windows.Forms.GroupBox gbCodeFlow_PKCE;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox tbCodeFlow_PKCE_Verifier;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.ComboBox cbCodeFlow_PKCE_Method;
     }
 }
 

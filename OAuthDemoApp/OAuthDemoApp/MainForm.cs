@@ -681,23 +681,32 @@ namespace OAuthDemoApp
             switch (cbGrantFlow.SelectedItem)
             {
                 case "Client Credentials":
+                    gbROPCFlow.Enabled = false;
+                    gbOnBehalfOf.Enabled = false;
+                    gbHybridFlow.Enabled = false;
+                    gbDeviceCodeFlow.Enabled = false;
+                    gbCodeFlow_PKCE.Enabled = false;
+                    break;
                 case "Authorization Code":
                     gbROPCFlow.Enabled = false;
                     gbOnBehalfOf.Enabled = false;
                     gbHybridFlow.Enabled = false;
                     gbDeviceCodeFlow.Enabled = false;
+                    gbCodeFlow_PKCE.Enabled = true;
                     break;
                 case "Device Code":
                     gbROPCFlow.Enabled = false;
                     gbOnBehalfOf.Enabled = false;
                     gbHybridFlow.Enabled = false;
                     gbDeviceCodeFlow.Enabled = true;
+                    gbCodeFlow_PKCE.Enabled = false;
                     break;
                 case "Resource Owner Password Credentials":
                     gbROPCFlow.Enabled = true;
                     gbOnBehalfOf.Enabled = false;
                     gbHybridFlow.Enabled = false;
                     gbDeviceCodeFlow.Enabled = false;
+                    gbCodeFlow_PKCE.Enabled = false;
                     break;
                 case "Implicit Grant":
                     gbROPCFlow.Enabled = false;
@@ -706,12 +715,14 @@ namespace OAuthDemoApp
                     gbDeviceCodeFlow.Enabled = false;
                     cbHybridFlow_Implicit_RequestCode.Enabled = false;
                     cbHybridFlow_Implicit_RequestCode.Visible = false;
+                    gbCodeFlow_PKCE.Enabled = false;
                     break;
                 case "On-Behalf-Of":
                     gbROPCFlow.Enabled = false;
                     gbOnBehalfOf.Enabled = true;
                     gbHybridFlow.Enabled = false;
                     gbDeviceCodeFlow.Enabled = false;
+                    gbCodeFlow_PKCE.Enabled = false;
                     break;
                 case "Hybrid":
                     gbROPCFlow.Enabled = false;
@@ -720,6 +731,7 @@ namespace OAuthDemoApp
                     gbDeviceCodeFlow.Enabled = false;
                     cbHybridFlow_Implicit_RequestCode.Enabled = true;
                     cbHybridFlow_Implicit_RequestCode.Visible = true;
+                    gbCodeFlow_PKCE.Enabled = cbHybridFlow_Implicit_RequestCode.Checked;
                     break;
             }
         }
@@ -1409,6 +1421,7 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
             this.cbStsType.SelectedIndex = 1;
             this.cbClientType.SelectedIndex = 0;
             this.cbGrantFlow.SelectedIndex = 2;
+            this.cbCodeFlow_PKCE_Method.SelectedIndex = 0;
 
             var cultures = CultureInfo.GetCultures(CultureTypes.AllCultures)
                 .Except(CultureInfo.GetCultures(CultureTypes.NeutralCultures));
@@ -1432,6 +1445,11 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
                 $"&refresh_token={refreshToken}";
             var result = await OAuthHelper.DoHttpPostAsync(tokenEndpoint, content, networkCredential);
             DisplayResults(result);
+        }
+
+        private void cbHybridFlow_Implicit_RequestCode_CheckedChanged(object sender, EventArgs e)
+        {
+            this.gbCodeFlow_PKCE.Enabled = cbHybridFlow_Implicit_RequestCode.Checked;
         }
     }
 }

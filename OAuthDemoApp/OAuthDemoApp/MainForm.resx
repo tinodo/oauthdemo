@@ -154,20 +154,6 @@ secret; it is exposed to the resource owner and MUST NOT be used
 alone for client authentication. The client identifier is unique to
 the authorization server.</value>
   </data>
-  <data name="tbCodeFlow_PKCE_Verifier.ToolTip" xml:space="preserve">
-    <value>Used to secure authorization code grants via Proof 
-Key for Code Exchange (PKCE) from a native or public 
-client. Required if code_challenge_method is included.
-It needs to be at least 43 characters long, and at most
-128 characters.</value>
-  </data>
-  <data name="cbCodeFlow_PKCE_Method.ToolTip" xml:space="preserve">
-    <value>The method used to encode the code_verifier for the 
-code_challenge parameter. Can be one of plain or S256. 
-If excluded, code_challenge is assumed to be plaintext 
-if code_challenge is included. Azure AAD v1.0 supports 
-both plain and S256.</value>
-  </data>
   <data name="rbAzureAdEndpoint_Tenant.ToolTip" xml:space="preserve">
     <value>Only users from a specific Azure AD tenant (whether they are members in the directory 
 with a work or school account, or they are guests in the directory with a personal 
@@ -243,6 +229,20 @@ used for preventing cross-site request forgery attacks. The
 state is also used to encode information about the user's 
 state in the app before the authentication request occurred, 
 such as the page or view they were on.</value>
+  </data>
+  <data name="tbCodeFlow_PKCE_Verifier.ToolTip" xml:space="preserve">
+    <value>Used to secure authorization code grants via Proof 
+Key for Code Exchange (PKCE) from a native or public 
+client. Required if code_challenge_method is included.
+It needs to be at least 43 characters long, and at most
+128 characters.</value>
+  </data>
+  <data name="cbCodeFlow_PKCE_Method.ToolTip" xml:space="preserve">
+    <value>The method used to encode the code_verifier for the 
+code_challenge parameter. Can be one of plain or S256. 
+If excluded, code_challenge is assumed to be plaintext 
+if code_challenge is included. Azure AAD v1.0 supports 
+both plain and S256.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
