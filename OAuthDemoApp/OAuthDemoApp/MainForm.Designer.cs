@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.label8 = new System.Windows.Forms.Label();
             this.tbAadTenant = new System.Windows.Forms.TextBox();
             this.tbAdfsFarmName = new System.Windows.Forms.TextBox();
@@ -159,6 +161,7 @@
             this.tpIdTokenDecoded = new System.Windows.Forms.TabPage();
             this.tbIdTokenDecoded = new System.Windows.Forms.TextBox();
             this.btnExit = new System.Windows.Forms.Button();
+            this.ttHint = new System.Windows.Forms.ToolTip(this.components);
             this.gbClientCredential_Cert.SuspendLayout();
             this.gbClientCredential_WIA.SuspendLayout();
             this.tcMain.SuspendLayout();
@@ -205,6 +208,8 @@
             this.tbAadTenant.Size = new System.Drawing.Size(64, 20);
             this.tbAadTenant.TabIndex = 11;
             this.tbAadTenant.Text = "contoso";
+            this.ttHint.SetToolTip(this.tbAadTenant, "The friendlyname (e.g. \'contoso\') or the GUID (e.g. \'7247f7a4-a54f-495e-883d-bd4e" +
+        "3b0bcf1e\')\r\nof your Azure AD tenant.");
             this.tbAadTenant.TextChanged += new System.EventHandler(this.GenerateStsEndpoints);
             // 
             // tbAdfsFarmName
@@ -248,6 +253,7 @@
             this.cbStsType.Name = "cbStsType";
             this.cbStsType.Size = new System.Drawing.Size(381, 21);
             this.cbStsType.TabIndex = 4;
+            this.ttHint.SetToolTip(this.cbStsType, "Select the type of the Secure Token Service (STS) you want to connect to.");
             this.cbStsType.SelectedIndexChanged += new System.EventHandler(this.CbStsType_SelectedIndexChanged);
             // 
             // tbTokenEndpoint
@@ -649,6 +655,7 @@
             this.rbAzureAdEndpoint_Tenant.TabIndex = 5;
             this.rbAzureAdEndpoint_Tenant.TabStop = true;
             this.rbAzureAdEndpoint_Tenant.Text = "Tenant Specific Endpoint:";
+            this.ttHint.SetToolTip(this.rbAzureAdEndpoint_Tenant, resources.GetString("rbAzureAdEndpoint_Tenant.ToolTip"));
             this.rbAzureAdEndpoint_Tenant.UseVisualStyleBackColor = true;
             this.rbAzureAdEndpoint_Tenant.CheckedChanged += new System.EventHandler(this.GenerateStsEndpoints);
             // 
@@ -660,6 +667,8 @@
             this.rbAzureAdEndpoint_Organizations.Size = new System.Drawing.Size(134, 17);
             this.rbAzureAdEndpoint_Organizations.TabIndex = 4;
             this.rbAzureAdEndpoint_Organizations.Text = "Organizations Endpoint";
+            this.ttHint.SetToolTip(this.rbAzureAdEndpoint_Organizations, "Only users with work or school accounts from Azure AD can sign in to the applicat" +
+        "ion.");
             this.rbAzureAdEndpoint_Organizations.UseVisualStyleBackColor = true;
             this.rbAzureAdEndpoint_Organizations.CheckedChanged += new System.EventHandler(this.GenerateStsEndpoints);
             // 
@@ -671,6 +680,7 @@
             this.rbAzureAdEndpoint_Consumers.Size = new System.Drawing.Size(122, 17);
             this.rbAzureAdEndpoint_Consumers.TabIndex = 3;
             this.rbAzureAdEndpoint_Consumers.Text = "Consumers Endpoint";
+            this.ttHint.SetToolTip(this.rbAzureAdEndpoint_Consumers, "Only users with a personal Microsoft account can sign in to the application.");
             this.rbAzureAdEndpoint_Consumers.UseVisualStyleBackColor = true;
             this.rbAzureAdEndpoint_Consumers.CheckedChanged += new System.EventHandler(this.GenerateStsEndpoints);
             // 
@@ -682,6 +692,8 @@
             this.rbAzureAdEndpoint_Common.Size = new System.Drawing.Size(201, 17);
             this.rbAzureAdEndpoint_Common.TabIndex = 2;
             this.rbAzureAdEndpoint_Common.Text = "Common Endpoint (Multi-Tenant App)";
+            this.ttHint.SetToolTip(this.rbAzureAdEndpoint_Common, "Users with both a personal Microsoft account and a work or school account from Az" +
+        "ure AD can sign in to the application.");
             this.rbAzureAdEndpoint_Common.UseVisualStyleBackColor = true;
             this.rbAzureAdEndpoint_Common.CheckedChanged += new System.EventHandler(this.GenerateStsEndpoints);
             // 
@@ -704,6 +716,7 @@
             this.rbAzureADv2.TabIndex = 1;
             this.rbAzureADv2.TabStop = true;
             this.rbAzureADv2.Text = "Use V2 Endpoint";
+            this.ttHint.SetToolTip(this.rbAzureADv2, resources.GetString("rbAzureADv2.ToolTip"));
             this.rbAzureADv2.UseVisualStyleBackColor = true;
             this.rbAzureADv2.CheckedChanged += new System.EventHandler(this.ChangeAzureAdVersion);
             // 
@@ -715,6 +728,7 @@
             this.rbAzureADv1.Size = new System.Drawing.Size(105, 17);
             this.rbAzureADv1.TabIndex = 0;
             this.rbAzureADv1.Text = "Use V1 Endpoint";
+            this.ttHint.SetToolTip(this.rbAzureADv1, resources.GetString("rbAzureADv1.ToolTip"));
             this.rbAzureADv1.UseVisualStyleBackColor = true;
             this.rbAzureADv1.CheckedChanged += new System.EventHandler(this.ChangeAzureAdVersion);
             // 
@@ -1597,6 +1611,12 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.BtnExit_Click);
             // 
+            // ttHint
+            // 
+            this.ttHint.IsBalloon = true;
+            this.ttHint.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.ttHint.ToolTipTitle = "Hint";
+            // 
             // MainForm
             // 
             this.AcceptButton = this.btnNext1;
@@ -1797,6 +1817,7 @@
         private System.Windows.Forms.GroupBox gbMiscOptions;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.ComboBox cbCultures;
+        private System.Windows.Forms.ToolTip ttHint;
     }
 }
 
