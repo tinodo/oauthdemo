@@ -91,8 +91,8 @@
             this.tpResource = new System.Windows.Forms.TabPage();
             this.btnNext3 = new System.Windows.Forms.Button();
             this.tpGrant = new System.Windows.Forms.TabPage();
-            this.cbCultures = new System.Windows.Forms.ComboBox();
             this.gbDeviceCodeFlow = new System.Windows.Forms.GroupBox();
+            this.cbCultures = new System.Windows.Forms.ComboBox();
             this.cbDeviceCodeFlowMessageLanguage = new System.Windows.Forms.CheckBox();
             this.btnNext4 = new System.Windows.Forms.Button();
             this.gbHybridFlow = new System.Windows.Forms.GroupBox();
@@ -117,6 +117,7 @@
             this.label19 = new System.Windows.Forms.Label();
             this.tb_ClientCredentials_UseROP_Password = new System.Windows.Forms.TextBox();
             this.tbOptions = new System.Windows.Forms.TabPage();
+            this.cbAddClientRequestId = new System.Windows.Forms.CheckBox();
             this.gbMiscOptions = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
@@ -220,6 +221,7 @@
             this.tbAdfsFarmName.Size = new System.Drawing.Size(215, 20);
             this.tbAdfsFarmName.TabIndex = 9;
             this.tbAdfsFarmName.Text = "sts.contoso.com";
+            this.ttHint.SetToolTip(this.tbAdfsFarmName, "The fully qualified name (e.g. \'server.domain.com\') for your AD FS Farm.");
             this.tbAdfsFarmName.TextChanged += new System.EventHandler(this.GenerateStsEndpoints);
             // 
             // label6
@@ -306,6 +308,7 @@
             this.cbGrantFlow.Name = "cbGrantFlow";
             this.cbGrantFlow.Size = new System.Drawing.Size(381, 21);
             this.cbGrantFlow.TabIndex = 5;
+            this.ttHint.SetToolTip(this.cbGrantFlow, resources.GetString("cbGrantFlow.ToolTip"));
             this.cbGrantFlow.SelectedIndexChanged += new System.EventHandler(this.CbGrantFlow_SelectedIndexChanged);
             // 
             // label4
@@ -339,6 +342,7 @@
             this.cbClientType.Name = "cbClientType";
             this.cbClientType.Size = new System.Drawing.Size(381, 21);
             this.cbClientType.TabIndex = 8;
+            this.ttHint.SetToolTip(this.cbClientType, resources.GetString("cbClientType.ToolTip"));
             this.cbClientType.SelectedIndexChanged += new System.EventHandler(this.CbClientType_SelectedIndexChanged);
             // 
             // tbClientId
@@ -348,6 +352,7 @@
             this.tbClientId.Size = new System.Drawing.Size(381, 20);
             this.tbClientId.TabIndex = 11;
             this.tbClientId.Text = "1950a258-227b-4e31-a9cf-717495945fc2";
+            this.ttHint.SetToolTip(this.tbClientId, resources.GetString("tbClientId.ToolTip"));
             // 
             // label9
             // 
@@ -364,6 +369,7 @@
             this.tbClientSecret.Name = "tbClientSecret";
             this.tbClientSecret.Size = new System.Drawing.Size(375, 20);
             this.tbClientSecret.TabIndex = 13;
+            this.ttHint.SetToolTip(this.tbClientSecret, "The shared key known by the STS, allowing the client to authenticate.");
             // 
             // label10
             // 
@@ -555,7 +561,7 @@
             this.tcMain.SelectedIndex = 0;
             this.tcMain.Size = new System.Drawing.Size(708, 560);
             this.tcMain.TabIndex = 11;
-            this.tcMain.SelectedIndexChanged += new System.EventHandler(this.tcMain_SelectedIndexChanged);
+            this.tcMain.SelectedIndexChanged += new System.EventHandler(this.TcMain_SelectedIndexChanged);
             // 
             // tpSTS
             // 
@@ -807,6 +813,8 @@
             this.tbClientRedirectUri.Size = new System.Drawing.Size(381, 20);
             this.tbClientRedirectUri.TabIndex = 23;
             this.tbClientRedirectUri.Text = "urn:ietf:wg:oauth:2.0:oob";
+            this.ttHint.SetToolTip(this.tbClientRedirectUri, "Enter the redirection URI of your client.\r\nThis URI has been provided during the " +
+        "registration\r\nof the client with the Secure Token Service.\r\n");
             // 
             // gbClientCredential_Secret
             // 
@@ -872,14 +880,6 @@
             this.tpGrant.Text = "Authorization Grant";
             this.tpGrant.UseVisualStyleBackColor = true;
             // 
-            // cbCultures
-            // 
-            this.cbCultures.FormattingEnabled = true;
-            this.cbCultures.Location = new System.Drawing.Point(189, 17);
-            this.cbCultures.Name = "cbCultures";
-            this.cbCultures.Size = new System.Drawing.Size(215, 21);
-            this.cbCultures.TabIndex = 42;
-            // 
             // gbDeviceCodeFlow
             // 
             this.gbDeviceCodeFlow.Controls.Add(this.cbCultures);
@@ -891,6 +891,14 @@
             this.gbDeviceCodeFlow.TabIndex = 41;
             this.gbDeviceCodeFlow.TabStop = false;
             this.gbDeviceCodeFlow.Text = "Device Code Flow";
+            // 
+            // cbCultures
+            // 
+            this.cbCultures.FormattingEnabled = true;
+            this.cbCultures.Location = new System.Drawing.Point(189, 17);
+            this.cbCultures.Name = "cbCultures";
+            this.cbCultures.Size = new System.Drawing.Size(215, 21);
+            this.cbCultures.TabIndex = 42;
             // 
             // cbDeviceCodeFlowMessageLanguage
             // 
@@ -1127,6 +1135,7 @@
             // 
             // tbOptions
             // 
+            this.tbOptions.Controls.Add(this.cbAddClientRequestId);
             this.tbOptions.Controls.Add(this.gbMiscOptions);
             this.tbOptions.Controls.Add(this.gbCodeFlow_PKCE);
             this.tbOptions.Controls.Add(this.btnExecute);
@@ -1139,6 +1148,16 @@
             this.tbOptions.TabIndex = 4;
             this.tbOptions.Text = "Options";
             this.tbOptions.UseVisualStyleBackColor = true;
+            // 
+            // cbAddClientRequestId
+            // 
+            this.cbAddClientRequestId.AutoSize = true;
+            this.cbAddClientRequestId.Location = new System.Drawing.Point(15, 365);
+            this.cbAddClientRequestId.Name = "cbAddClientRequestId";
+            this.cbAddClientRequestId.Size = new System.Drawing.Size(247, 17);
+            this.cbAddClientRequestId.TabIndex = 55;
+            this.cbAddClientRequestId.Text = "Add a \'client-request-id\' to requests to the STS.";
+            this.cbAddClientRequestId.UseVisualStyleBackColor = true;
             // 
             // gbMiscOptions
             // 
@@ -1367,7 +1386,6 @@
             this.tbResult.Controls.Add(this.btnTest);
             this.tbResult.Controls.Add(this.textBox1);
             this.tbResult.Controls.Add(this.label24);
-            this.tbResult.Controls.Add(this.btnUseRefreshToken);
             this.tbResult.Controls.Add(this.tabControl2);
             this.tbResult.Location = new System.Drawing.Point(4, 22);
             this.tbResult.Name = "tbResult";
@@ -1410,12 +1428,13 @@
             // btnUseRefreshToken
             // 
             this.btnUseRefreshToken.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUseRefreshToken.Location = new System.Drawing.Point(583, 270);
+            this.btnUseRefreshToken.Location = new System.Drawing.Point(566, 259);
             this.btnUseRefreshToken.Name = "btnUseRefreshToken";
             this.btnUseRefreshToken.Size = new System.Drawing.Size(110, 23);
             this.btnUseRefreshToken.TabIndex = 40;
             this.btnUseRefreshToken.Text = "Use &Refresh Token";
             this.btnUseRefreshToken.UseVisualStyleBackColor = true;
+            this.btnUseRefreshToken.Click += new System.EventHandler(this.btnUseRefreshToken_Click);
             // 
             // tabControl2
             // 
@@ -1432,7 +1451,7 @@
             this.tabControl2.Location = new System.Drawing.Point(3, 3);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(690, 261);
+            this.tabControl2.Size = new System.Drawing.Size(690, 314);
             this.tabControl2.TabIndex = 18;
             // 
             // tpErrors
@@ -1488,11 +1507,11 @@
             // btnValidateAccessToken
             // 
             this.btnValidateAccessToken.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnValidateAccessToken.Location = new System.Drawing.Point(543, 206);
+            this.btnValidateAccessToken.Location = new System.Drawing.Point(508, 206);
             this.btnValidateAccessToken.Name = "btnValidateAccessToken";
-            this.btnValidateAccessToken.Size = new System.Drawing.Size(133, 23);
+            this.btnValidateAccessToken.Size = new System.Drawing.Size(168, 23);
             this.btnValidateAccessToken.TabIndex = 44;
-            this.btnValidateAccessToken.Text = "Validate Access Token";
+            this.btnValidateAccessToken.Text = "Validate Access Token (BETA)";
             this.btnValidateAccessToken.UseVisualStyleBackColor = true;
             this.btnValidateAccessToken.Click += new System.EventHandler(this.BtnAccessValidateToken_Click);
             // 
@@ -1530,21 +1549,24 @@
             // tpRefreshToken
             // 
             this.tpRefreshToken.Controls.Add(this.tbRefreshToken);
+            this.tpRefreshToken.Controls.Add(this.btnUseRefreshToken);
             this.tpRefreshToken.Location = new System.Drawing.Point(4, 22);
             this.tpRefreshToken.Name = "tpRefreshToken";
             this.tpRefreshToken.Padding = new System.Windows.Forms.Padding(3);
-            this.tpRefreshToken.Size = new System.Drawing.Size(682, 235);
+            this.tpRefreshToken.Size = new System.Drawing.Size(682, 288);
             this.tpRefreshToken.TabIndex = 1;
             this.tpRefreshToken.Text = "Refresh Token";
             this.tpRefreshToken.UseVisualStyleBackColor = true;
             // 
             // tbRefreshToken
             // 
-            this.tbRefreshToken.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbRefreshToken.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbRefreshToken.Location = new System.Drawing.Point(3, 3);
             this.tbRefreshToken.Multiline = true;
             this.tbRefreshToken.Name = "tbRefreshToken";
-            this.tbRefreshToken.Size = new System.Drawing.Size(676, 229);
+            this.tbRefreshToken.Size = new System.Drawing.Size(676, 250);
             this.tbRefreshToken.TabIndex = 7;
             // 
             // tpIdToken
@@ -1625,6 +1647,8 @@
             this.ClientSize = new System.Drawing.Size(732, 610);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.tcMain);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(748, 649);
             this.Name = "MainForm";
             this.Text = "OAuth 2.0 & OpenID Connect Demo App v2";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -1818,6 +1842,7 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.ComboBox cbCultures;
         private System.Windows.Forms.ToolTip ttHint;
+        private System.Windows.Forms.CheckBox cbAddClientRequestId;
     }
 }
 

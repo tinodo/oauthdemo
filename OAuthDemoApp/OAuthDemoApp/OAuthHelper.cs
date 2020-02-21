@@ -5,10 +5,12 @@
     using System.IO;
     using System.Linq;
     using System.Net;
+    using System.Runtime.InteropServices;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
     using System.Text;
     using System.Threading.Tasks;
+    using System.Windows.Forms.VisualStyles;
 
     public static class OAuthHelper
     {
@@ -283,6 +285,12 @@
 
         public static bool TryValidateToken(string jwt, dynamic keys, out string errorMessage)
         {
+            // works for AAD v1 and v2, but not for tokens generated for Graph. (DUH)
+            // See: https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/issues/812
+            // See: https://stackoverflow.com/questions/45317152/invalid-signature-while-validating-azure-ad-access-token-but-id-token-works
+            // possible fix? https://github.com/AzureAD/microsoft-authentication-library-for-js/issues/815
+            // it uses HMACSHA256, not RSA256.
+
             if (string.IsNullOrEmpty(jwt))
             {
                 errorMessage = "Token is null or empty.";
@@ -315,38 +323,53 @@
 
             var bytesToSign = Encoding.UTF8.GetBytes($"{header}.{payload}");
 
-            dynamic desHeader = JsonConvert.DeserializeObject(Base64Decode(header));
-            dynamic desPayload = JsonConvert.DeserializeObject(Base64Decode(payload));
+            dynamic deserializedHeader = JsonConvert.DeserializeObject(Base64Decode(header));
+            dynamic deserializedPayload = JsonConvert.DeserializeObject(Base64Decode(payload));
+
+            if (!string.IsNullOrEmpty((string)deserializedHeader.nonce))
+            {
+                errorMessage = "Not supported for token issued for GRAPH (with a 'nonce' in the header).";
+                return false;
+            }
 
             // check iss: issuer
 
-            if (UnixTimestampToUTC((int)desPayload.nbf) > DateTime.UtcNow)
+            if (UnixTimestampToUTC((int)deserializedPayload.nbf) > DateTime.UtcNow)
             {
                 errorMessage = "Token is not yet valid.";
                 return false;
             }
 
-            if (UnixTimestampToUTC((int)desPayload.exp) < DateTime.UtcNow)
+            if (UnixTimestampToUTC((int)deserializedPayload.exp) < DateTime.UtcNow)
             {
                 errorMessage = "Token has expired.";
                 return false;
             }
 
-            var algorithm = (string)desHeader.alg;
+            var algorithm = (string)deserializedHeader.alg;
 
             var key = string.Empty;
             var exponent = string.Empty;
             var issuer = string.Empty;
 
+            var kid = (string)deserializedHeader.kid;
+            var x5t = (string)deserializedHeader.x5t;
+
             foreach (dynamic k in keys.keys)
             {
-                if ((((string)k.kid == (string)desHeader.kid) || ((string)k.x5t == (string)desHeader.x5t)) && (string)k.use == "sig")
+                if ((((string)k.kid == kid) || ((string)k.x5t == x5t)) && (string)k.use == "sig")
                 {
                     //key = (string)k.x5c[0];
                     key = (string)k.n;
                     exponent = (string)k.e;
                     issuer = (string)k.issuer;
-                    break;
+                    // quick fix for aad v1 endpoints; it doesnt expose issuer!
+                    if (string.IsNullOrEmpty(issuer))
+                    {
+                        issuer = (string)deserializedPayload.iss;
+                    }
+
+                    //break;
                 }
             }
 
@@ -356,9 +379,21 @@
                 return false;
             }
 
-            if (issuer != (string)desPayload.iss)
+            string issuerToCompare = (string)deserializedPayload.iss;
+
+            // Quick fix for Azure AD issues! The issuer will not match the issuer from the metadata!
+            if (issuerToCompare.StartsWith("https://sts.windows.net/") && issuer.StartsWith("https://login.microsoftonline.com/"))
             {
-                errorMessage = $"Issuer {desPayload.iss} does not match expected issuer {issuer}.";
+                issuerToCompare = issuerToCompare.Replace("https://sts.windows.net/", "https://login.microsoftonline.com/");
+                if (issuer.EndsWith("/v2.0"))
+                {
+                    issuerToCompare += "v2.0";
+                }
+            }
+
+            if (issuer != issuerToCompare)
+            {
+                errorMessage = $"Issuer {issuerToCompare} does not match expected issuer {issuer}.";
                 return false;
             }
 
@@ -371,6 +406,7 @@
               });
 
             RSAPKCS1SignatureDeformatter rsaDeformatter = new RSAPKCS1SignatureDeformatter(rsa);
+            
             HashAlgorithm sha;
             switch (algorithm.ToUpper())
             {
@@ -393,14 +429,15 @@
 
             byte[] signature = sha.ComputeHash(bytesToSign);
 
-            if (!rsaDeformatter.VerifySignature(signature, crypto))
+            if (rsaDeformatter.VerifySignature(signature, crypto))
+            {
+                errorMessage = string.Empty;
+                return true;
+            }
             {
                 errorMessage = "Invalid signature.";
                 return false;
             }
-
-            errorMessage = "";
-            return true;
         }
     }
 }

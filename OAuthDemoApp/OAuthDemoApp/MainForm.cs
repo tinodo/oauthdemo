@@ -2,12 +2,7 @@
  * Client ID's:
  * Tutorial Sample App: 6731de76-14a6-49ae-97bc-6eba6914391e
  * Microsoft Azure PowerShell: 1950a258-227b-4e31-a9cf-717495945fc2
- * 
- * 
- * 
- * 
- * 
- * 
+ * Microsoft Azure Cross-platform Command Line Interface: 04b07795-8ddb-461a-bbee-02f9e1bf7b46
  */
 
 namespace OAuthDemoApp
@@ -15,16 +10,11 @@ namespace OAuthDemoApp
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Data;
-    using System.Drawing;
     using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Net;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices.WindowsRuntime;
-    using System.Security;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
     using System.Text;
@@ -933,13 +923,18 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
             var prompt = (string)cbCodeFlow_Prompt.SelectedItem;
             var pkceMethod = (string)cbCodeFlow_PKCE_Method.SelectedItem;
             var pkceVerifier = tbCodeFlow_PKCE_Verifier.Text;
-            var requestId = Guid.NewGuid().ToString();
+            var addClientRequestId = cbAddClientRequestId.Checked;
 
-            var content = $"client_id={clientId}" + 
+            var content = $"client_id={clientId}" +
                 "&response_type=code" +
-                $"&redirect_uri={redirectUri}" + 
-                GenerateResourceOrScopeContent(true) + 
-                $"&client-request-id={requestId}";
+                $"&redirect_uri={redirectUri}" +
+                GenerateResourceOrScopeContent(true);
+
+            if (addClientRequestId)
+            {
+                var requestId = Guid.NewGuid().ToString();
+                content += $"&client-request-id={requestId}";
+            }
 
             //response_mode = query, fragment, form_post
             //prompt = login, none, consent
@@ -1202,6 +1197,7 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
                 content += $"&grant_type=authorization_code" +
                     $"&redirect_uri={redirectUri}" +
                     $"&code={code}";
+
                 if (!string.IsNullOrEmpty(pkceMethod))
                     content += $"&code_verifier={pkceVerifier}";
 
@@ -1376,7 +1372,7 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
             }
         }
 
-        private void tcMain_SelectedIndexChanged(object sender, EventArgs e)
+        private void TcMain_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (this.tcMain.SelectedIndex)
             {
@@ -1414,6 +1410,20 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
             this.cbCultures.ValueMember = "Name";
             this.cbCultures.Sorted = true;
             this.cbCultures.DataSource = new BindingSource(cultures, null);
+        }
+
+        private async void btnUseRefreshToken_Click(object sender, EventArgs e)
+        {
+            var tokenEndpoint = tbTokenEndpoint.Text;
+            var redirectUri = tbClientRedirectUri.Text;
+            var refreshToken = tbRefreshToken.Text;
+
+            var content = GenerateGenericContent(out var networkCredential) +
+                $"&grant_type=refresh_token" +
+                $"&redirect_uri={redirectUri}" +
+                $"&refresh_token={refreshToken}";
+            var result = await OAuthHelper.DoHttpPostAsync(tokenEndpoint, content, networkCredential);
+            DisplayResults(result);
         }
     }
 }
