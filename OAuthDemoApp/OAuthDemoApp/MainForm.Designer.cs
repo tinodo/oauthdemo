@@ -47,6 +47,7 @@
             this.tbClientSecret = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.gbClientCredential_Cert = new System.Windows.Forms.GroupBox();
+            this.label27 = new System.Windows.Forms.Label();
             this.tbClientCredentials_Cert_CertSN = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.btnClientCredentials_Cert_SelectCert = new System.Windows.Forms.Button();
@@ -88,8 +89,8 @@
             this.tpResource = new System.Windows.Forms.TabPage();
             this.btnNext3 = new System.Windows.Forms.Button();
             this.tpGrant = new System.Windows.Forms.TabPage();
+            this.cbCultures = new System.Windows.Forms.ComboBox();
             this.gbDeviceCodeFlow = new System.Windows.Forms.GroupBox();
-            this.tbDeviceCodeFlowMessageLanguage = new System.Windows.Forms.TextBox();
             this.cbDeviceCodeFlowMessageLanguage = new System.Windows.Forms.CheckBox();
             this.btnNext4 = new System.Windows.Forms.Button();
             this.gbHybridFlow = new System.Windows.Forms.GroupBox();
@@ -98,7 +99,8 @@
             this.cbHybridFlow_Implicit_RequestAccessToken = new System.Windows.Forms.CheckBox();
             this.cbHybridFlow_Implicit_RequestIdToken = new System.Windows.Forms.CheckBox();
             this.gbOnBehalfOf = new System.Windows.Forms.GroupBox();
-            this.label27 = new System.Windows.Forms.Label();
+            this.rbOBO_UseResource = new System.Windows.Forms.RadioButton();
+            this.rbOBO_UseScope = new System.Windows.Forms.RadioButton();
             this.tbOBO_ScopeOrResource = new System.Windows.Forms.TextBox();
             this.label32 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -113,22 +115,23 @@
             this.label19 = new System.Windows.Forms.Label();
             this.tb_ClientCredentials_UseROP_Password = new System.Windows.Forms.TextBox();
             this.tbOptions = new System.Windows.Forms.TabPage();
+            this.gbMiscOptions = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.tbCodeFlow_LoginHint = new System.Windows.Forms.TextBox();
+            this.lbCodeFlow_DomainHint = new System.Windows.Forms.ComboBox();
+            this.cbCodeFlow_ResponseMode = new System.Windows.Forms.ComboBox();
+            this.cbCodeFlow_Prompt = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.tbOptions_State = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             this.gbCodeFlow_PKCE = new System.Windows.Forms.GroupBox();
             this.label20 = new System.Windows.Forms.Label();
             this.tbCodeFlow_PKCE_Verifier = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.cbCodeFlow_PKCE_Method = new System.Windows.Forms.ComboBox();
-            this.tbCodeFlow_LoginHint = new System.Windows.Forms.TextBox();
-            this.cbCodeFlow_ResponseMode = new System.Windows.Forms.ComboBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.tbOptions_State = new System.Windows.Forms.TextBox();
-            this.cbCodeFlow_Prompt = new System.Windows.Forms.ComboBox();
-            this.lbCodeFlow_DomainHint = new System.Windows.Forms.ComboBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
             this.btnExecute = new System.Windows.Forms.Button();
             this.rbPreferMSAL = new System.Windows.Forms.RadioButton();
             this.rbPreferHttp = new System.Windows.Forms.RadioButton();
@@ -156,8 +159,6 @@
             this.tpIdTokenDecoded = new System.Windows.Forms.TabPage();
             this.tbIdTokenDecoded = new System.Windows.Forms.TextBox();
             this.btnExit = new System.Windows.Forms.Button();
-            this.rbOBO_UseScope = new System.Windows.Forms.RadioButton();
-            this.rbOBO_UseResource = new System.Windows.Forms.RadioButton();
             this.gbClientCredential_Cert.SuspendLayout();
             this.gbClientCredential_WIA.SuspendLayout();
             this.tcMain.SuspendLayout();
@@ -175,6 +176,7 @@
             this.gbOnBehalfOf.SuspendLayout();
             this.gbROPCFlow.SuspendLayout();
             this.tbOptions.SuspendLayout();
+            this.gbMiscOptions.SuspendLayout();
             this.gbCodeFlow_PKCE.SuspendLayout();
             this.tbResult.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -368,6 +370,7 @@
             // 
             // gbClientCredential_Cert
             // 
+            this.gbClientCredential_Cert.Controls.Add(this.label27);
             this.gbClientCredential_Cert.Controls.Add(this.tbClientCredentials_Cert_CertSN);
             this.gbClientCredential_Cert.Controls.Add(this.label11);
             this.gbClientCredential_Cert.Controls.Add(this.btnClientCredentials_Cert_SelectCert);
@@ -379,12 +382,21 @@
             this.gbClientCredential_Cert.TabStop = false;
             this.gbClientCredential_Cert.Text = "Certificate-Based Authentication";
             // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(9, 53);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(88, 13);
+            this.label27.TabIndex = 16;
+            this.label27.Text = "Cert. Thumbprint:";
+            // 
             // tbClientCredentials_Cert_CertSN
             // 
             this.tbClientCredentials_Cert_CertSN.Enabled = false;
-            this.tbClientCredentials_Cert_CertSN.Location = new System.Drawing.Point(15, 50);
+            this.tbClientCredentials_Cert_CertSN.Location = new System.Drawing.Point(118, 50);
             this.tbClientCredentials_Cert_CertSN.Name = "tbClientCredentials_Cert_CertSN";
-            this.tbClientCredentials_Cert_CertSN.Size = new System.Drawing.Size(478, 20);
+            this.tbClientCredentials_Cert_CertSN.Size = new System.Drawing.Size(375, 20);
             this.tbClientCredentials_Cert_CertSN.TabIndex = 15;
             this.tbClientCredentials_Cert_CertSN.Text = "01b76f2d2dba33e01832a11a2be3ae88bf9bfb7d";
             // 
@@ -537,6 +549,7 @@
             this.tcMain.SelectedIndex = 0;
             this.tcMain.Size = new System.Drawing.Size(708, 560);
             this.tcMain.TabIndex = 11;
+            this.tcMain.SelectedIndexChanged += new System.EventHandler(this.tcMain_SelectedIndexChanged);
             // 
             // tpSTS
             // 
@@ -845,9 +858,17 @@
             this.tpGrant.Text = "Authorization Grant";
             this.tpGrant.UseVisualStyleBackColor = true;
             // 
+            // cbCultures
+            // 
+            this.cbCultures.FormattingEnabled = true;
+            this.cbCultures.Location = new System.Drawing.Point(189, 17);
+            this.cbCultures.Name = "cbCultures";
+            this.cbCultures.Size = new System.Drawing.Size(215, 21);
+            this.cbCultures.TabIndex = 42;
+            // 
             // gbDeviceCodeFlow
             // 
-            this.gbDeviceCodeFlow.Controls.Add(this.tbDeviceCodeFlowMessageLanguage);
+            this.gbDeviceCodeFlow.Controls.Add(this.cbCultures);
             this.gbDeviceCodeFlow.Controls.Add(this.cbDeviceCodeFlowMessageLanguage);
             this.gbDeviceCodeFlow.Enabled = false;
             this.gbDeviceCodeFlow.Location = new System.Drawing.Point(14, 425);
@@ -856,14 +877,6 @@
             this.gbDeviceCodeFlow.TabIndex = 41;
             this.gbDeviceCodeFlow.TabStop = false;
             this.gbDeviceCodeFlow.Text = "Device Code Flow";
-            // 
-            // tbDeviceCodeFlowMessageLanguage
-            // 
-            this.tbDeviceCodeFlowMessageLanguage.Location = new System.Drawing.Point(189, 17);
-            this.tbDeviceCodeFlowMessageLanguage.Name = "tbDeviceCodeFlowMessageLanguage";
-            this.tbDeviceCodeFlowMessageLanguage.Size = new System.Drawing.Size(96, 20);
-            this.tbDeviceCodeFlowMessageLanguage.TabIndex = 32;
-            this.tbDeviceCodeFlowMessageLanguage.Text = "nl-NL";
             // 
             // cbDeviceCodeFlowMessageLanguage
             // 
@@ -963,14 +976,27 @@
             this.gbOnBehalfOf.TabStop = false;
             this.gbOnBehalfOf.Text = "On-Behalf-Of";
             // 
-            // label27
+            // rbOBO_UseResource
             // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(280, 26);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(92, 13);
-            this.label27.TabIndex = 33;
-            this.label27.Text = "Scope/Resource:";
+            this.rbOBO_UseResource.AutoSize = true;
+            this.rbOBO_UseResource.Location = new System.Drawing.Point(64, 131);
+            this.rbOBO_UseResource.Name = "rbOBO_UseResource";
+            this.rbOBO_UseResource.Size = new System.Drawing.Size(71, 17);
+            this.rbOBO_UseResource.TabIndex = 34;
+            this.rbOBO_UseResource.Text = "Resource";
+            this.rbOBO_UseResource.UseVisualStyleBackColor = true;
+            // 
+            // rbOBO_UseScope
+            // 
+            this.rbOBO_UseScope.AutoSize = true;
+            this.rbOBO_UseScope.Checked = true;
+            this.rbOBO_UseScope.Location = new System.Drawing.Point(11, 130);
+            this.rbOBO_UseScope.Name = "rbOBO_UseScope";
+            this.rbOBO_UseScope.Size = new System.Drawing.Size(56, 17);
+            this.rbOBO_UseScope.TabIndex = 33;
+            this.rbOBO_UseScope.TabStop = true;
+            this.rbOBO_UseScope.Text = "Scope";
+            this.rbOBO_UseScope.UseVisualStyleBackColor = true;
             // 
             // tbOBO_ScopeOrResource
             // 
@@ -1040,7 +1066,6 @@
             // 
             // gbROPCFlow
             // 
-            this.gbROPCFlow.Controls.Add(this.label27);
             this.gbROPCFlow.Controls.Add(this.tb_ClientCredentials_UseROP_Username);
             this.gbROPCFlow.Controls.Add(this.label18);
             this.gbROPCFlow.Controls.Add(this.label19);
@@ -1088,17 +1113,8 @@
             // 
             // tbOptions
             // 
+            this.tbOptions.Controls.Add(this.gbMiscOptions);
             this.tbOptions.Controls.Add(this.gbCodeFlow_PKCE);
-            this.tbOptions.Controls.Add(this.tbCodeFlow_LoginHint);
-            this.tbOptions.Controls.Add(this.cbCodeFlow_ResponseMode);
-            this.tbOptions.Controls.Add(this.label22);
-            this.tbOptions.Controls.Add(this.label7);
-            this.tbOptions.Controls.Add(this.label23);
-            this.tbOptions.Controls.Add(this.tbOptions_State);
-            this.tbOptions.Controls.Add(this.cbCodeFlow_Prompt);
-            this.tbOptions.Controls.Add(this.lbCodeFlow_DomainHint);
-            this.tbOptions.Controls.Add(this.label15);
-            this.tbOptions.Controls.Add(this.label21);
             this.tbOptions.Controls.Add(this.btnExecute);
             this.tbOptions.Controls.Add(this.rbPreferMSAL);
             this.tbOptions.Controls.Add(this.rbPreferHttp);
@@ -1110,6 +1126,122 @@
             this.tbOptions.Text = "Options";
             this.tbOptions.UseVisualStyleBackColor = true;
             // 
+            // gbMiscOptions
+            // 
+            this.gbMiscOptions.Controls.Add(this.label15);
+            this.gbMiscOptions.Controls.Add(this.label21);
+            this.gbMiscOptions.Controls.Add(this.tbCodeFlow_LoginHint);
+            this.gbMiscOptions.Controls.Add(this.lbCodeFlow_DomainHint);
+            this.gbMiscOptions.Controls.Add(this.cbCodeFlow_ResponseMode);
+            this.gbMiscOptions.Controls.Add(this.cbCodeFlow_Prompt);
+            this.gbMiscOptions.Controls.Add(this.label22);
+            this.gbMiscOptions.Controls.Add(this.tbOptions_State);
+            this.gbMiscOptions.Controls.Add(this.label7);
+            this.gbMiscOptions.Controls.Add(this.label23);
+            this.gbMiscOptions.Location = new System.Drawing.Point(15, 52);
+            this.gbMiscOptions.Name = "gbMiscOptions";
+            this.gbMiscOptions.Size = new System.Drawing.Size(516, 170);
+            this.gbMiscOptions.TabIndex = 54;
+            this.gbMiscOptions.TabStop = false;
+            this.gbMiscOptions.Text = "Misc. Options";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(9, 25);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(35, 13);
+            this.label15.TabIndex = 51;
+            this.label15.Text = "State:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(9, 81);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(43, 13);
+            this.label21.TabIndex = 43;
+            this.label21.Text = "Prompt:";
+            // 
+            // tbCodeFlow_LoginHint
+            // 
+            this.tbCodeFlow_LoginHint.Location = new System.Drawing.Point(134, 108);
+            this.tbCodeFlow_LoginHint.Name = "tbCodeFlow_LoginHint";
+            this.tbCodeFlow_LoginHint.Size = new System.Drawing.Size(331, 20);
+            this.tbCodeFlow_LoginHint.TabIndex = 46;
+            // 
+            // lbCodeFlow_DomainHint
+            // 
+            this.lbCodeFlow_DomainHint.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.lbCodeFlow_DomainHint.FormattingEnabled = true;
+            this.lbCodeFlow_DomainHint.Items.AddRange(new object[] {
+            "consumers",
+            "organizations"});
+            this.lbCodeFlow_DomainHint.Location = new System.Drawing.Point(134, 134);
+            this.lbCodeFlow_DomainHint.Name = "lbCodeFlow_DomainHint";
+            this.lbCodeFlow_DomainHint.Size = new System.Drawing.Size(121, 21);
+            this.lbCodeFlow_DomainHint.TabIndex = 48;
+            // 
+            // cbCodeFlow_ResponseMode
+            // 
+            this.cbCodeFlow_ResponseMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCodeFlow_ResponseMode.FormattingEnabled = true;
+            this.cbCodeFlow_ResponseMode.Items.AddRange(new object[] {
+            "query",
+            "fragment",
+            "form_post"});
+            this.cbCodeFlow_ResponseMode.Location = new System.Drawing.Point(134, 51);
+            this.cbCodeFlow_ResponseMode.Name = "cbCodeFlow_ResponseMode";
+            this.cbCodeFlow_ResponseMode.Size = new System.Drawing.Size(121, 21);
+            this.cbCodeFlow_ResponseMode.TabIndex = 50;
+            // 
+            // cbCodeFlow_Prompt
+            // 
+            this.cbCodeFlow_Prompt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCodeFlow_Prompt.FormattingEnabled = true;
+            this.cbCodeFlow_Prompt.Items.AddRange(new object[] {
+            "login",
+            "consent",
+            "admin_consent"});
+            this.cbCodeFlow_Prompt.Location = new System.Drawing.Point(134, 78);
+            this.cbCodeFlow_Prompt.Name = "cbCodeFlow_Prompt";
+            this.cbCodeFlow_Prompt.Size = new System.Drawing.Size(121, 21);
+            this.cbCodeFlow_Prompt.TabIndex = 44;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(9, 108);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(58, 13);
+            this.label22.TabIndex = 45;
+            this.label22.Text = "Login Hint:";
+            // 
+            // tbOptions_State
+            // 
+            this.tbOptions_State.Location = new System.Drawing.Point(134, 25);
+            this.tbOptions_State.Name = "tbOptions_State";
+            this.tbOptions_State.Size = new System.Drawing.Size(331, 20);
+            this.tbOptions_State.TabIndex = 52;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(9, 54);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(88, 13);
+            this.label7.TabIndex = 49;
+            this.label7.Text = "Response Mode:";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(9, 134);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(68, 13);
+            this.label23.TabIndex = 47;
+            this.label23.Text = "Domain Hint:";
+            // 
             // gbCodeFlow_PKCE
             // 
             this.gbCodeFlow_PKCE.Controls.Add(this.label20);
@@ -1117,7 +1249,7 @@
             this.gbCodeFlow_PKCE.Controls.Add(this.label26);
             this.gbCodeFlow_PKCE.Controls.Add(this.label25);
             this.gbCodeFlow_PKCE.Controls.Add(this.cbCodeFlow_PKCE_Method);
-            this.gbCodeFlow_PKCE.Location = new System.Drawing.Point(15, 246);
+            this.gbCodeFlow_PKCE.Location = new System.Drawing.Point(15, 228);
             this.gbCodeFlow_PKCE.Name = "gbCodeFlow_PKCE";
             this.gbCodeFlow_PKCE.Size = new System.Drawing.Size(516, 131);
             this.gbCodeFlow_PKCE.TabIndex = 53;
@@ -1172,103 +1304,6 @@
             this.cbCodeFlow_PKCE_Method.Name = "cbCodeFlow_PKCE_Method";
             this.cbCodeFlow_PKCE_Method.Size = new System.Drawing.Size(121, 21);
             this.cbCodeFlow_PKCE_Method.TabIndex = 55;
-            // 
-            // tbCodeFlow_LoginHint
-            // 
-            this.tbCodeFlow_LoginHint.Location = new System.Drawing.Point(137, 175);
-            this.tbCodeFlow_LoginHint.Name = "tbCodeFlow_LoginHint";
-            this.tbCodeFlow_LoginHint.Size = new System.Drawing.Size(331, 20);
-            this.tbCodeFlow_LoginHint.TabIndex = 46;
-            // 
-            // cbCodeFlow_ResponseMode
-            // 
-            this.cbCodeFlow_ResponseMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCodeFlow_ResponseMode.FormattingEnabled = true;
-            this.cbCodeFlow_ResponseMode.Items.AddRange(new object[] {
-            "query",
-            "fragment",
-            "form_post"});
-            this.cbCodeFlow_ResponseMode.Location = new System.Drawing.Point(137, 118);
-            this.cbCodeFlow_ResponseMode.Name = "cbCodeFlow_ResponseMode";
-            this.cbCodeFlow_ResponseMode.Size = new System.Drawing.Size(121, 21);
-            this.cbCodeFlow_ResponseMode.TabIndex = 50;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(12, 175);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(58, 13);
-            this.label22.TabIndex = 45;
-            this.label22.Text = "Login Hint:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 121);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(88, 13);
-            this.label7.TabIndex = 49;
-            this.label7.Text = "Response Mode:";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(12, 201);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(68, 13);
-            this.label23.TabIndex = 47;
-            this.label23.Text = "Domain Hint:";
-            // 
-            // tbOptions_State
-            // 
-            this.tbOptions_State.Location = new System.Drawing.Point(137, 92);
-            this.tbOptions_State.Name = "tbOptions_State";
-            this.tbOptions_State.Size = new System.Drawing.Size(331, 20);
-            this.tbOptions_State.TabIndex = 52;
-            // 
-            // cbCodeFlow_Prompt
-            // 
-            this.cbCodeFlow_Prompt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCodeFlow_Prompt.FormattingEnabled = true;
-            this.cbCodeFlow_Prompt.Items.AddRange(new object[] {
-            "login",
-            "consent",
-            "admin_consent"});
-            this.cbCodeFlow_Prompt.Location = new System.Drawing.Point(137, 145);
-            this.cbCodeFlow_Prompt.Name = "cbCodeFlow_Prompt";
-            this.cbCodeFlow_Prompt.Size = new System.Drawing.Size(121, 21);
-            this.cbCodeFlow_Prompt.TabIndex = 44;
-            // 
-            // lbCodeFlow_DomainHint
-            // 
-            this.lbCodeFlow_DomainHint.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.lbCodeFlow_DomainHint.FormattingEnabled = true;
-            this.lbCodeFlow_DomainHint.Items.AddRange(new object[] {
-            "consumers",
-            "organizations"});
-            this.lbCodeFlow_DomainHint.Location = new System.Drawing.Point(137, 201);
-            this.lbCodeFlow_DomainHint.Name = "lbCodeFlow_DomainHint";
-            this.lbCodeFlow_DomainHint.Size = new System.Drawing.Size(121, 21);
-            this.lbCodeFlow_DomainHint.TabIndex = 48;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(12, 92);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(35, 13);
-            this.label15.TabIndex = 51;
-            this.label15.Text = "State:";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(12, 148);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(43, 13);
-            this.label21.TabIndex = 43;
-            this.label21.Text = "Prompt:";
             // 
             // btnExecute
             // 
@@ -1562,30 +1597,9 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.BtnExit_Click);
             // 
-            // rbOBO_UseScope
-            // 
-            this.rbOBO_UseScope.AutoSize = true;
-            this.rbOBO_UseScope.Checked = true;
-            this.rbOBO_UseScope.Location = new System.Drawing.Point(11, 130);
-            this.rbOBO_UseScope.Name = "rbOBO_UseScope";
-            this.rbOBO_UseScope.Size = new System.Drawing.Size(56, 17);
-            this.rbOBO_UseScope.TabIndex = 33;
-            this.rbOBO_UseScope.TabStop = true;
-            this.rbOBO_UseScope.Text = "Scope";
-            this.rbOBO_UseScope.UseVisualStyleBackColor = true;
-            // 
-            // rbOBO_UseResource
-            // 
-            this.rbOBO_UseResource.AutoSize = true;
-            this.rbOBO_UseResource.Location = new System.Drawing.Point(64, 131);
-            this.rbOBO_UseResource.Name = "rbOBO_UseResource";
-            this.rbOBO_UseResource.Size = new System.Drawing.Size(71, 17);
-            this.rbOBO_UseResource.TabIndex = 34;
-            this.rbOBO_UseResource.Text = "Resource";
-            this.rbOBO_UseResource.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
+            this.AcceptButton = this.btnNext1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 610);
@@ -1593,6 +1607,7 @@
             this.Controls.Add(this.tcMain);
             this.Name = "MainForm";
             this.Text = "OAuth 2.0 & OpenID Connect Demo App v2";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.gbClientCredential_Cert.ResumeLayout(false);
             this.gbClientCredential_Cert.PerformLayout();
             this.gbClientCredential_WIA.ResumeLayout(false);
@@ -1625,6 +1640,8 @@
             this.gbROPCFlow.PerformLayout();
             this.tbOptions.ResumeLayout(false);
             this.tbOptions.PerformLayout();
+            this.gbMiscOptions.ResumeLayout(false);
+            this.gbMiscOptions.PerformLayout();
             this.gbCodeFlow_PKCE.ResumeLayout(false);
             this.gbCodeFlow_PKCE.PerformLayout();
             this.tbResult.ResumeLayout(false);
@@ -1740,7 +1757,6 @@
         private System.Windows.Forms.TextBox tbDeviceCodeEndpoint;
         private System.Windows.Forms.GroupBox gbDeviceCodeFlow;
         private System.Windows.Forms.CheckBox cbDeviceCodeFlowMessageLanguage;
-        private System.Windows.Forms.TextBox tbDeviceCodeFlowMessageLanguage;
         private System.Windows.Forms.GroupBox gbAzureAD;
         private System.Windows.Forms.RadioButton rbAzureADv1;
         private System.Windows.Forms.Panel panel2;
@@ -1767,7 +1783,6 @@
         private System.Windows.Forms.TextBox tbClientRedirectUri;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label27;
         private System.Windows.Forms.TextBox tbOBO_ScopeOrResource;
         private System.Windows.Forms.TabPage tpAccessTokenDecoded;
         private System.Windows.Forms.TabPage tpIdTokenDecoded;
@@ -1779,6 +1794,9 @@
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.RadioButton rbOBO_UseResource;
         private System.Windows.Forms.RadioButton rbOBO_UseScope;
+        private System.Windows.Forms.GroupBox gbMiscOptions;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.ComboBox cbCultures;
     }
 }
 

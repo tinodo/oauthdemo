@@ -79,9 +79,7 @@
             // device_code for AADv2 and code for AADv1
             var deviceCode = "device_code";
             if (string.IsNullOrEmpty((string)this.authorizationServerResponseMessage.verification_uri))
-            {
                 deviceCode = "code";
-            }
 
             var content = $"grant_type=urn:ietf:params:oauth:grant-type:device_code" +
                 $"&client_id={this.clientId}" +

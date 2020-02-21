@@ -13,7 +13,7 @@ Scenario:
 #### HTTP Web Requests:
 | STS | Client Type | Flow | Tested |
 |---|---|---|---|
-| Azure Active Directory (V1) | Public Client | Client Credentials| N/A |
+| **Azure Active Directory (V1)** | Public Client | Client Credentials| N/A |
 |  |  | Resource Owner Password Credentials | No |
 |  |  | Authorization Code | Yes |
 |  |  | Implicit Grant | Yes |
@@ -34,13 +34,41 @@ Scenario:
 |  |  | On-Behalf-Of | N/A |
 |  |  | Device Code | N/A |
 |  |  | Hybrid | N/A |
-|  | Confidential Client (Certificate) | Client Credentials| No |
+|  | Confidential Client (Certificate) | Client Credentials| Yes |
 |  |  | Resource Owner Password Credentials | No |
-|  |  | Authorization Code | No |
-|  |  | Implicit Grant | No |
+|  |  | Authorization Code | Yes |
+|  |  | Implicit Grant | Yes |
 |  |  | On-Behalf-Of | No |
 |  |  | Device Code | N/A |
-|  |  | Hybrid | No |
+|  |  | Hybrid | Yes |
+| **Azure Active Directory (V2)** | Public Client | Client Credentials| N/A |
+|  |  | Resource Owner Password Credentials | No |
+|  |  | Authorization Code | Yes |
+|  |  | Implicit Grant | Yes |
+|  |  | On-Behalf-Of | No |
+|  |  | Device Code | Yes |
+|  |  | Hybrid | Yes |
+|  | Confidential Client (Client Credentials) | Client Credentials| Yes |
+|  |  | Resource Owner Password Credentials | No |
+|  |  | Authorization Code | Yes |
+|  |  | Implicit Grant | Yes |
+|  |  | On-Behalf-Of | No |
+|  |  | Device Code | N/A |
+|  |  | Hybrid | Yes |
+|  | Confidential Client (Windows Integrated Authentication) | Client Credentials| N/A |
+|  |  | Resource Owner Password Credentials | N/A |
+|  |  | Authorization Code | N/A |
+|  |  | Implicit Grant | N/A |
+|  |  | On-Behalf-Of | N/A |
+|  |  | Device Code | N/A |
+|  |  | Hybrid | N/A |
+|  | Confidential Client (Certificate) | Client Credentials| Yes |
+|  |  | Resource Owner Password Credentials | No |
+|  |  | Authorization Code | Yes |
+|  |  | Implicit Grant | Yes |
+|  |  | On-Behalf-Of | No |
+|  |  | Device Code | N/A |
+|  |  | Hybrid | Yes |
  
 #### ADAL:
 

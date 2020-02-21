@@ -18,10 +18,12 @@ namespace OAuthDemoApp
     using System.ComponentModel;
     using System.Data;
     using System.Drawing;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Net;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices.WindowsRuntime;
     using System.Security;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
@@ -536,6 +538,7 @@ namespace OAuthDemoApp
                 case "Device Code":
                     if (cbClientType.SelectedItem.ToString() != "Public Client")
                     {
+                        //https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/wiki/Device-Code-Flow
                         MessageBox.Show("Device Code Flow is only available for Public Clients", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
@@ -711,6 +714,7 @@ namespace OAuthDemoApp
                     gbHybridFlow.Enabled = true;
                     gbDeviceCodeFlow.Enabled = false;
                     cbHybridFlow_Implicit_RequestCode.Enabled = false;
+                    cbHybridFlow_Implicit_RequestCode.Visible = false;
                     break;
                 case "On-Behalf-Of":
                     gbROPCFlow.Enabled = false;
@@ -724,6 +728,7 @@ namespace OAuthDemoApp
                     gbHybridFlow.Enabled = true;
                     gbDeviceCodeFlow.Enabled = false;
                     cbHybridFlow_Implicit_RequestCode.Enabled = true;
+                    cbHybridFlow_Implicit_RequestCode.Visible = true;
                     break;
             }
         }
@@ -883,7 +888,7 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
             var deviceCodeEndpoint = tbDeviceCodeEndpoint.Text;
             var clientId = tbClientId.Text;
             var useCustomLanguage = cbDeviceCodeFlowMessageLanguage.Checked;
-            var customLanguage = tbDeviceCodeFlowMessageLanguage.Text;
+            var customLanguage = (string)cbCultures.SelectedValue;
             var content = GenerateGenericContent(out var networkCredential);
 
             if (useCustomLanguage)
@@ -1369,6 +1374,46 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
             {
                 MessageBox.Show(errorMessage, "Token Validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void tcMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (this.tcMain.SelectedIndex)
+            {
+                case 0:
+                    this.AcceptButton = this.btnNext1;
+                    break;
+                case 1:
+                    this.AcceptButton = this.btnNext2;
+                    break;
+                case 2:
+                    this.AcceptButton = this.btnNext3;
+                    break;
+                case 3:
+                    this.AcceptButton = this.btnNext4;
+                    break;
+                case 4:
+                    this.AcceptButton = this.btnExecute;
+                    break;
+                case 5:
+                    this.AcceptButton = null;
+                    break;
+            }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            this.cbStsType.SelectedIndex = 1;
+            this.cbClientType.SelectedIndex = 0;
+            this.cbGrantFlow.SelectedIndex = 2;
+
+            var cultures = CultureInfo.GetCultures(CultureTypes.AllCultures)
+                .Except(CultureInfo.GetCultures(CultureTypes.NeutralCultures));
+
+            this.cbCultures.DisplayMember = "DisplayName";
+            this.cbCultures.ValueMember = "Name";
+            this.cbCultures.Sorted = true;
+            this.cbCultures.DataSource = new BindingSource(cultures, null);
         }
     }
 }
