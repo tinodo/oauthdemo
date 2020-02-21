@@ -1422,6 +1422,9 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
             this.cbClientType.SelectedIndex = 0;
             this.cbGrantFlow.SelectedIndex = 2;
             this.cbCodeFlow_PKCE_Method.SelectedIndex = 0;
+            this.cbCodeFlow_ResponseMode.SelectedIndex = 0;
+            this.cbCodeFlow_Prompt.SelectedIndex = 0;
+            this.lbCodeFlow_DomainHint.SelectedIndex = 0;
 
             var cultures = CultureInfo.GetCultures(CultureTypes.AllCultures)
                 .Except(CultureInfo.GetCultures(CultureTypes.NeutralCultures));
@@ -1433,7 +1436,7 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
             this.cbCultures.SelectedIndex = this.cbCultures.FindStringExact(Thread.CurrentThread.CurrentCulture.DisplayName);
         }
 
-        private async void btnUseRefreshToken_Click(object sender, EventArgs e)
+        private async void BtnUseRefreshToken_Click(object sender, EventArgs e)
         {
             var tokenEndpoint = tbTokenEndpoint.Text;
             var redirectUri = tbClientRedirectUri.Text;
@@ -1447,7 +1450,7 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
             DisplayResults(result);
         }
 
-        private void cbHybridFlow_Implicit_RequestCode_CheckedChanged(object sender, EventArgs e)
+        private void CbHybridFlow_Implicit_RequestCode_CheckedChanged(object sender, EventArgs e)
         {
             this.gbCodeFlow_PKCE.Enabled = cbHybridFlow_Implicit_RequestCode.Checked;
         }
