@@ -1279,7 +1279,13 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
         {
             //test userinfo
             var token = tbAccessToken.Text;
-            //var endpoint = "https://login.microsoftonline.com/microsoft.onmicrosoft.com/openid/userinfo";
+
+            if (string.IsNullOrEmpty(token))
+            {
+                MessageBox.Show("Obtain an access token for Graph first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var endpoint = "https://graph.microsoft.com/oidc/userinfo";
             var request = WebRequest.Create(endpoint) as HttpWebRequest;
             request.Timeout = 2500;

@@ -141,8 +141,6 @@
             this.rbPreferADAL = new System.Windows.Forms.RadioButton();
             this.tbResult = new System.Windows.Forms.TabPage();
             this.btnTest = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
             this.btnUseRefreshToken = new System.Windows.Forms.Button();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tpErrors = new System.Windows.Forms.TabPage();
@@ -1384,8 +1382,6 @@
             // tbResult
             // 
             this.tbResult.Controls.Add(this.btnTest);
-            this.tbResult.Controls.Add(this.textBox1);
-            this.tbResult.Controls.Add(this.label24);
             this.tbResult.Controls.Add(this.tabControl2);
             this.tbResult.Location = new System.Drawing.Point(4, 22);
             this.tbResult.Name = "tbResult";
@@ -1397,38 +1393,18 @@
             // btnTest
             // 
             this.btnTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTest.Location = new System.Drawing.Point(583, 508);
+            this.btnTest.Location = new System.Drawing.Point(561, 508);
             this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(110, 23);
+            this.btnTest.Size = new System.Drawing.Size(132, 23);
             this.btnTest.TabIndex = 43;
-            this.btnTest.Text = "Test";
+            this.btnTest.Text = "Test Graph UserInfo";
             this.btnTest.UseVisualStyleBackColor = true;
             this.btnTest.Click += new System.EventHandler(this.BtnTest_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(10, 336);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(683, 122);
-            this.textBox1.TabIndex = 42;
-            // 
-            // label24
-            // 
-            this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(10, 320);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(40, 13);
-            this.label24.TabIndex = 41;
-            this.label24.Text = "Result:";
             // 
             // btnUseRefreshToken
             // 
             this.btnUseRefreshToken.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUseRefreshToken.Location = new System.Drawing.Point(566, 259);
+            this.btnUseRefreshToken.Location = new System.Drawing.Point(566, 444);
             this.btnUseRefreshToken.Name = "btnUseRefreshToken";
             this.btnUseRefreshToken.Size = new System.Drawing.Size(110, 23);
             this.btnUseRefreshToken.TabIndex = 40;
@@ -1451,7 +1427,7 @@
             this.tabControl2.Location = new System.Drawing.Point(3, 3);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(690, 314);
+            this.tabControl2.Size = new System.Drawing.Size(690, 499);
             this.tabControl2.TabIndex = 18;
             // 
             // tpErrors
@@ -1459,7 +1435,7 @@
             this.tpErrors.Controls.Add(this.tbErrors);
             this.tpErrors.Location = new System.Drawing.Point(4, 22);
             this.tpErrors.Name = "tpErrors";
-            this.tpErrors.Size = new System.Drawing.Size(682, 235);
+            this.tpErrors.Size = new System.Drawing.Size(682, 473);
             this.tpErrors.TabIndex = 4;
             this.tpErrors.Text = "Error(s)";
             this.tpErrors.UseVisualStyleBackColor = true;
@@ -1470,7 +1446,7 @@
             this.tbErrors.Location = new System.Drawing.Point(0, 0);
             this.tbErrors.Multiline = true;
             this.tbErrors.Name = "tbErrors";
-            this.tbErrors.Size = new System.Drawing.Size(682, 235);
+            this.tbErrors.Size = new System.Drawing.Size(682, 473);
             this.tbErrors.TabIndex = 9;
             // 
             // tpCode
@@ -1478,7 +1454,7 @@
             this.tpCode.Controls.Add(this.tbCode);
             this.tpCode.Location = new System.Drawing.Point(4, 22);
             this.tpCode.Name = "tpCode";
-            this.tpCode.Size = new System.Drawing.Size(682, 235);
+            this.tpCode.Size = new System.Drawing.Size(682, 473);
             this.tpCode.TabIndex = 3;
             this.tpCode.Text = "Code";
             this.tpCode.UseVisualStyleBackColor = true;
@@ -1489,7 +1465,7 @@
             this.tbCode.Location = new System.Drawing.Point(0, 0);
             this.tbCode.Multiline = true;
             this.tbCode.Name = "tbCode";
-            this.tbCode.Size = new System.Drawing.Size(682, 235);
+            this.tbCode.Size = new System.Drawing.Size(682, 473);
             this.tbCode.TabIndex = 8;
             // 
             // tpAccessToken
@@ -1499,7 +1475,7 @@
             this.tpAccessToken.Location = new System.Drawing.Point(4, 22);
             this.tpAccessToken.Name = "tpAccessToken";
             this.tpAccessToken.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAccessToken.Size = new System.Drawing.Size(682, 235);
+            this.tpAccessToken.Size = new System.Drawing.Size(682, 473);
             this.tpAccessToken.TabIndex = 0;
             this.tpAccessToken.Text = "Access Token";
             this.tpAccessToken.UseVisualStyleBackColor = true;
@@ -1507,7 +1483,7 @@
             // btnValidateAccessToken
             // 
             this.btnValidateAccessToken.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnValidateAccessToken.Location = new System.Drawing.Point(508, 206);
+            this.btnValidateAccessToken.Location = new System.Drawing.Point(508, 444);
             this.btnValidateAccessToken.Name = "btnValidateAccessToken";
             this.btnValidateAccessToken.Size = new System.Drawing.Size(168, 23);
             this.btnValidateAccessToken.TabIndex = 44;
@@ -1523,16 +1499,15 @@
             this.tbAccessToken.Location = new System.Drawing.Point(3, 3);
             this.tbAccessToken.Multiline = true;
             this.tbAccessToken.Name = "tbAccessToken";
-            this.tbAccessToken.Size = new System.Drawing.Size(676, 197);
+            this.tbAccessToken.Size = new System.Drawing.Size(676, 435);
             this.tbAccessToken.TabIndex = 6;
-            this.tbAccessToken.Text = "Access Token";
             // 
             // tpAccessTokenDecoded
             // 
             this.tpAccessTokenDecoded.Controls.Add(this.tbAccessTokenDecoded);
             this.tpAccessTokenDecoded.Location = new System.Drawing.Point(4, 22);
             this.tpAccessTokenDecoded.Name = "tpAccessTokenDecoded";
-            this.tpAccessTokenDecoded.Size = new System.Drawing.Size(682, 235);
+            this.tpAccessTokenDecoded.Size = new System.Drawing.Size(682, 473);
             this.tpAccessTokenDecoded.TabIndex = 5;
             this.tpAccessTokenDecoded.Text = "Access Token (Decoded)";
             this.tpAccessTokenDecoded.UseVisualStyleBackColor = true;
@@ -1543,7 +1518,7 @@
             this.tbAccessTokenDecoded.Location = new System.Drawing.Point(0, 0);
             this.tbAccessTokenDecoded.Multiline = true;
             this.tbAccessTokenDecoded.Name = "tbAccessTokenDecoded";
-            this.tbAccessTokenDecoded.Size = new System.Drawing.Size(682, 235);
+            this.tbAccessTokenDecoded.Size = new System.Drawing.Size(682, 473);
             this.tbAccessTokenDecoded.TabIndex = 10;
             // 
             // tpRefreshToken
@@ -1553,7 +1528,7 @@
             this.tpRefreshToken.Location = new System.Drawing.Point(4, 22);
             this.tpRefreshToken.Name = "tpRefreshToken";
             this.tpRefreshToken.Padding = new System.Windows.Forms.Padding(3);
-            this.tpRefreshToken.Size = new System.Drawing.Size(682, 288);
+            this.tpRefreshToken.Size = new System.Drawing.Size(682, 473);
             this.tpRefreshToken.TabIndex = 1;
             this.tpRefreshToken.Text = "Refresh Token";
             this.tpRefreshToken.UseVisualStyleBackColor = true;
@@ -1566,7 +1541,7 @@
             this.tbRefreshToken.Location = new System.Drawing.Point(3, 3);
             this.tbRefreshToken.Multiline = true;
             this.tbRefreshToken.Name = "tbRefreshToken";
-            this.tbRefreshToken.Size = new System.Drawing.Size(676, 250);
+            this.tbRefreshToken.Size = new System.Drawing.Size(676, 435);
             this.tbRefreshToken.TabIndex = 7;
             // 
             // tpIdToken
@@ -1575,7 +1550,7 @@
             this.tpIdToken.Controls.Add(this.tbIdToken);
             this.tpIdToken.Location = new System.Drawing.Point(4, 22);
             this.tpIdToken.Name = "tpIdToken";
-            this.tpIdToken.Size = new System.Drawing.Size(682, 235);
+            this.tpIdToken.Size = new System.Drawing.Size(682, 473);
             this.tpIdToken.TabIndex = 2;
             this.tpIdToken.Text = "ID Token";
             this.tpIdToken.UseVisualStyleBackColor = true;
@@ -1583,7 +1558,7 @@
             // btnValidateIdToken
             // 
             this.btnValidateIdToken.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnValidateIdToken.Location = new System.Drawing.Point(546, 209);
+            this.btnValidateIdToken.Location = new System.Drawing.Point(546, 447);
             this.btnValidateIdToken.Name = "btnValidateIdToken";
             this.btnValidateIdToken.Size = new System.Drawing.Size(133, 23);
             this.btnValidateIdToken.TabIndex = 45;
@@ -1599,16 +1574,15 @@
             this.tbIdToken.Location = new System.Drawing.Point(0, 0);
             this.tbIdToken.Multiline = true;
             this.tbIdToken.Name = "tbIdToken";
-            this.tbIdToken.Size = new System.Drawing.Size(682, 203);
+            this.tbIdToken.Size = new System.Drawing.Size(682, 441);
             this.tbIdToken.TabIndex = 8;
-            this.tbIdToken.Text = "ID Token";
             // 
             // tpIdTokenDecoded
             // 
             this.tpIdTokenDecoded.Controls.Add(this.tbIdTokenDecoded);
             this.tpIdTokenDecoded.Location = new System.Drawing.Point(4, 22);
             this.tpIdTokenDecoded.Name = "tpIdTokenDecoded";
-            this.tpIdTokenDecoded.Size = new System.Drawing.Size(682, 235);
+            this.tpIdTokenDecoded.Size = new System.Drawing.Size(682, 473);
             this.tpIdTokenDecoded.TabIndex = 7;
             this.tpIdTokenDecoded.Text = "ID Token (Decoded)";
             this.tpIdTokenDecoded.UseVisualStyleBackColor = true;
@@ -1619,7 +1593,7 @@
             this.tbIdTokenDecoded.Location = new System.Drawing.Point(0, 0);
             this.tbIdTokenDecoded.Multiline = true;
             this.tbIdTokenDecoded.Name = "tbIdTokenDecoded";
-            this.tbIdTokenDecoded.Size = new System.Drawing.Size(682, 235);
+            this.tbIdTokenDecoded.Size = new System.Drawing.Size(682, 473);
             this.tbIdTokenDecoded.TabIndex = 9;
             // 
             // btnExit
@@ -1689,7 +1663,6 @@
             this.gbCodeFlow_PKCE.ResumeLayout(false);
             this.gbCodeFlow_PKCE.PerformLayout();
             this.tbResult.ResumeLayout(false);
-            this.tbResult.PerformLayout();
             this.tabControl2.ResumeLayout(false);
             this.tpErrors.ResumeLayout(false);
             this.tpErrors.PerformLayout();
@@ -1781,8 +1754,6 @@
         private System.Windows.Forms.RadioButton rbPreferHttp;
         private System.Windows.Forms.RadioButton rbPreferADAL;
         private System.Windows.Forms.TabPage tbResult;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Button btnUseRefreshToken;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tpAccessToken;
