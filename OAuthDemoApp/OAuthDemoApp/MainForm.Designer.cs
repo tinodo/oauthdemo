@@ -1200,6 +1200,7 @@
             this.tbCodeFlow_LoginHint.Name = "tbCodeFlow_LoginHint";
             this.tbCodeFlow_LoginHint.Size = new System.Drawing.Size(331, 20);
             this.tbCodeFlow_LoginHint.TabIndex = 46;
+            this.ttHint.SetToolTip(this.tbCodeFlow_LoginHint, resources.GetString("tbCodeFlow_LoginHint.ToolTip"));
             // 
             // lbCodeFlow_DomainHint
             // 
@@ -1212,6 +1213,7 @@
             this.lbCodeFlow_DomainHint.Name = "lbCodeFlow_DomainHint";
             this.lbCodeFlow_DomainHint.Size = new System.Drawing.Size(121, 21);
             this.lbCodeFlow_DomainHint.TabIndex = 48;
+            this.ttHint.SetToolTip(this.lbCodeFlow_DomainHint, resources.GetString("lbCodeFlow_DomainHint.ToolTip"));
             // 
             // cbCodeFlow_ResponseMode
             // 
@@ -1225,6 +1227,7 @@
             this.cbCodeFlow_ResponseMode.Name = "cbCodeFlow_ResponseMode";
             this.cbCodeFlow_ResponseMode.Size = new System.Drawing.Size(121, 21);
             this.cbCodeFlow_ResponseMode.TabIndex = 50;
+            this.ttHint.SetToolTip(this.cbCodeFlow_ResponseMode, resources.GetString("cbCodeFlow_ResponseMode.ToolTip"));
             // 
             // cbCodeFlow_Prompt
             // 
@@ -1238,6 +1241,7 @@
             this.cbCodeFlow_Prompt.Name = "cbCodeFlow_Prompt";
             this.cbCodeFlow_Prompt.Size = new System.Drawing.Size(121, 21);
             this.cbCodeFlow_Prompt.TabIndex = 44;
+            this.ttHint.SetToolTip(this.cbCodeFlow_Prompt, resources.GetString("cbCodeFlow_Prompt.ToolTip"));
             // 
             // label22
             // 
@@ -1254,6 +1258,7 @@
             this.tbOptions_State.Name = "tbOptions_State";
             this.tbOptions_State.Size = new System.Drawing.Size(331, 20);
             this.tbOptions_State.TabIndex = 52;
+            this.ttHint.SetToolTip(this.tbOptions_State, resources.GetString("tbOptions_State.ToolTip"));
             // 
             // label7
             // 
@@ -1305,6 +1310,7 @@
             this.tbCodeFlow_PKCE_Verifier.Size = new System.Drawing.Size(240, 20);
             this.tbCodeFlow_PKCE_Verifier.TabIndex = 55;
             this.tbCodeFlow_PKCE_Verifier.Text = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyx0123456789";
+            this.ttHint.SetToolTip(this.tbCodeFlow_PKCE_Verifier, resources.GetString("tbCodeFlow_PKCE_Verifier.ToolTip"));
             // 
             // label26
             // 
@@ -1335,6 +1341,7 @@
             this.cbCodeFlow_PKCE_Method.Name = "cbCodeFlow_PKCE_Method";
             this.cbCodeFlow_PKCE_Method.Size = new System.Drawing.Size(121, 21);
             this.cbCodeFlow_PKCE_Method.TabIndex = 55;
+            this.ttHint.SetToolTip(this.cbCodeFlow_PKCE_Method, resources.GetString("cbCodeFlow_PKCE_Method.ToolTip"));
             // 
             // btnExecute
             // 

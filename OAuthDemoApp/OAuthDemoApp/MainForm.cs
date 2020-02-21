@@ -18,6 +18,7 @@ namespace OAuthDemoApp
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
     using System.Text;
+    using System.Threading;
     using System.Threading.Tasks;
     using System.Windows.Forms;
 
@@ -666,12 +667,12 @@ namespace OAuthDemoApp
                 using (var reader = new StreamReader(resp.GetResponseStream()))
                 {
                     var response = (await reader.ReadToEndAsync()).Trim();
-                    MessageBox.Show(response);
+                    MessageBox.Show(OAuthHelper.FormatJson(response), "Metadata");
                 }
             }
             catch (WebException err)
             {
-                MessageBox.Show(err.Message);
+                MessageBox.Show(err.Message, "Metadata - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1416,6 +1417,7 @@ If users need to use multi-factor authentication (MFA) to log in to the applicat
             this.cbCultures.ValueMember = "Name";
             this.cbCultures.Sorted = true;
             this.cbCultures.DataSource = new BindingSource(cultures, null);
+            this.cbCultures.SelectedIndex = this.cbCultures.FindStringExact(Thread.CurrentThread.CurrentCulture.DisplayName);
         }
 
         private async void btnUseRefreshToken_Click(object sender, EventArgs e)
