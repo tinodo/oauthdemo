@@ -65,8 +65,11 @@
 
         private void AuthenticationTimedOut(object sender, EventArgs e)
         {
-            MessageBox.Show("Authentication has expired.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            this.authenticationCallbackTimer.Stop();
+            this.authenticationTimeoutTimer.Stop();
+            this.formRefreshTimer.Stop();
             this.DialogResult = DialogResult.No;
+            MessageBox.Show("Authentication has expired.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             this.Close();
         }
 
